@@ -127,7 +127,7 @@ public class Customer  implements Serializable {
     }
 
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-    @JoinColumn(name = "branchID", nullable = false)
+    @JoinColumn(name = "branchId", nullable = false)
     public Branch getBranch() {
         return branch;
     }

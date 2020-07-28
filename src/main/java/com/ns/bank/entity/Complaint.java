@@ -48,7 +48,7 @@ public class Complaint  implements Serializable {
     }
 
     @ManyToOne(cascade=CascadeType.MERGE,fetch = FetchType.LAZY)
-    @JoinColumn(name = "statusID")
+    @JoinColumn(name = "statusId")
     public Status getStatus() {
         return status;
     }
