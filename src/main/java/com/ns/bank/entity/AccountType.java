@@ -1,7 +1,11 @@
 package com.ns.bank.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
+
 @Entity
 @Table(name="accountType")
 public class AccountType  implements Serializable {
@@ -13,13 +17,15 @@ public class AccountType  implements Serializable {
     private Double withdrawLimit;
     private Integer transactionLimit;
     private Eligibility eligibility;
-
+    private Set<LoanType> loanTypes;
 
     public AccountType() {
     }
 
 
-    public AccountType(Long id, String name, Float interest, Double minBalance, Double withdrawLimit, Integer transactionLimit, Eligibility eligibility) {
+    public AccountType(Long id, String name, Set<LoanType> loanTypes,Float interest, Double minBalance,
+                       Double withdrawLimit,
+                       Integer transactionLimit, Eligibility eligibility) {
         this.id = id;
         this.name = name;
         this.interest = interest;
@@ -27,6 +33,7 @@ public class AccountType  implements Serializable {
         this.withdrawLimit = withdrawLimit;
         this.transactionLimit = transactionLimit;
         this.eligibility = eligibility;
+        this.loanTypes = loanTypes;
     }
 
     @Id
@@ -89,5 +96,15 @@ public class AccountType  implements Serializable {
 
     public void setEligibility(Eligibility eligibility) {
         this.eligibility = eligibility;
+    }
+
+    @OneToMany(mappedBy = "accountType",cascade=CascadeType.ALL,fetch = FetchType.LAZY)
+    @JsonBackReference
+    public Set<LoanType> getLoanTypes() {
+        return loanTypes;
+    }
+
+    public void setLoanTypes(Set<LoanType> loanTypes) {
+        this.loanTypes = loanTypes;
     }
 }

@@ -14,14 +14,19 @@ public class LoanTypeModel implements Serializable {
     private Double maxAmount;
     private RowStatusModel rowStatusModel;
     private Set<LoanModel> loanModels;
+    private Set<AccountTypeModel> accountTypeModels;
 
 
 
     public LoanTypeModel() {
     }
-    public LoanTypeModel(Integer id, String name, Double interest, Integer months, EligibilityModel eligibilityModel, Double minAmount, Double maxAmount, RowStatusModel rowStatusModel, Set<LoanModel> loanModels) {
+    public LoanTypeModel(Integer id,Set<AccountTypeModel> accountTypeModels, String name, Double interest,
+                         Integer months,
+                         EligibilityModel eligibilityModel
+            , Double minAmount, Double maxAmount, RowStatusModel rowStatusModel, Set<LoanModel> loanModels) {
         this.id = id;
         this.name = name;
+        this.accountTypeModels = accountTypeModels;
         this.interest = interest;
         this.months = months;
         this.eligibilityModel = eligibilityModel;

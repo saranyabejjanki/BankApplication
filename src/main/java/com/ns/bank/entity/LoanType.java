@@ -27,15 +27,19 @@ public class LoanType {
     @JoinColumn(name = "rowStatusId")
     private RowStatus rowStatus;
 
-    @OneToMany(mappedBy = "loanType",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "loanType", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonBackReference
     private Set<Loan> loans;
 
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "accountTypeId")
+    private AccountType accountType;
 
 
     public LoanType() {
     }
-    public LoanType(Integer id, String name, Double interest, Integer months, Eligibility eligibility, Double minAmount, Double maxAmount, RowStatus rowStatus, Set<Loan> loans) {
+
+    public LoanType(Integer id, String name, Double interest, Integer months, Eligibility eligibility, Double minAmount, Double maxAmount, RowStatus rowStatus, Set<Loan> loans, AccountType accountType) {
         this.id = id;
         this.name = name;
         this.interest = interest;
@@ -45,6 +49,7 @@ public class LoanType {
         this.maxAmount = maxAmount;
         this.rowStatus = rowStatus;
         this.loans = loans;
+        this.accountType = accountType;
     }
 
     public Integer getId() {
@@ -117,5 +122,13 @@ public class LoanType {
 
     public void setLoans(Set<Loan> loans) {
         this.loans = loans;
+    }
+
+    public AccountType getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(AccountType accountType) {
+        this.accountType = accountType;
     }
 }
