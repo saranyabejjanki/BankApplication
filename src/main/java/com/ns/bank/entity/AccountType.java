@@ -10,7 +10,6 @@ public class AccountType  implements Serializable {
     private String name;
     private Float interest;
     private Double minBalance;
-    private Double maxBalance;
     private Double withdrawLimit;
     private Integer transactionLimit;
     private Eligibility eligibility;
@@ -20,12 +19,11 @@ public class AccountType  implements Serializable {
     }
 
 
-    public AccountType(Long id, String name, Float interest, Double minBalance, Double maxBalance, Double withdrawLimit, Integer transactionLimit, Eligibility eligibility) {
+    public AccountType(Long id, String name, Float interest, Double minBalance, Double withdrawLimit, Integer transactionLimit, Eligibility eligibility) {
         this.id = id;
         this.name = name;
         this.interest = interest;
         this.minBalance = minBalance;
-        this.maxBalance = maxBalance;
         this.withdrawLimit = withdrawLimit;
         this.transactionLimit = transactionLimit;
         this.eligibility = eligibility;
@@ -64,14 +62,6 @@ public class AccountType  implements Serializable {
 
     public void setMinBalance(Double minBalance) {
         this.minBalance = minBalance;
-    }
-    @Column(name = "maxBalance")
-    public Double getMaxBalance() {
-        return maxBalance;
-    }
-
-    public void setMaxBalance(Double maxBalance) {
-        this.maxBalance = maxBalance;
     }
     @Column(name = "withdrawLimit")
     public Double getWithdrawLimit() {
