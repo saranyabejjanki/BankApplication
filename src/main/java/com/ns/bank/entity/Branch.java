@@ -22,7 +22,6 @@ public class Branch  implements Serializable {
     private RowStatus rowStatus;
 
 
-
     public Branch() {
     }
 

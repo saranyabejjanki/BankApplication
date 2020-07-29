@@ -3,11 +3,12 @@ package com.ns.bank.entity;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "withdraw")
-public class Withdraw {
+public class Withdraw  implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

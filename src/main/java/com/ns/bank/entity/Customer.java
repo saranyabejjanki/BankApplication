@@ -12,7 +12,6 @@ import java.util.Set;
 @Table(name="customer")
 public class Customer  implements Serializable {
 
-
     private Long id;
     private String name;
     private Date dob;

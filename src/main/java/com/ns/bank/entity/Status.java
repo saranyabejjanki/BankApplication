@@ -3,10 +3,11 @@ package com.ns.bank.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
-public class Status {
+public class Status  implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
