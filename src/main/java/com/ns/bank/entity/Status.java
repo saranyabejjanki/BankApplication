@@ -16,22 +16,22 @@ public class Status  implements Serializable {
     private String name;
 
     @OneToMany(mappedBy = "status", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonBackReference
+   // @JsonBackReference
     private Set<Withdraw> withdraws;
 
     @OneToMany(mappedBy = "status", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonBackReference
+   // @JsonBackReference
     private Set<Transfer> transfers;
 
     @OneToMany(mappedBy = "status", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonBackReference
+    //@JsonBackReference
     private Set<Deposit> deposits;
 
     @OneToMany(mappedBy = "status", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonBackReference
+   // @JsonBackReference
     private Set<Complaint> complaints;
     @OneToMany(mappedBy = "status", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonBackReference
+    //@JsonBackReference
     private Set<Loan> loans;
 
     public Status() {

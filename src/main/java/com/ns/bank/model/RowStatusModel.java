@@ -7,10 +7,10 @@ public class RowStatusModel implements Serializable {
 
     private Integer id;
     private String name;
-    private Set<LoanTypeModel> loanTypeModels;
+   /* private Set<LoanTypeModel> loanTypeModels;
     private Set<UserModel> userModels;
     private Set<BranchModel> branchModels;
-
+*/
 
     public RowStatusModel() {
     }
@@ -18,9 +18,9 @@ public class RowStatusModel implements Serializable {
     public RowStatusModel(Integer id, String name, Set<LoanTypeModel> loanTypeModels, Set<UserModel> userModels, Set<BranchModel> branchModels) {
         this.id = id;
         this.name = name;
-        this.loanTypeModels = loanTypeModels;
+      /*  this.loanTypeModels = loanTypeModels;
         this.userModels = userModels;
-        this.branchModels = branchModels;
+        this.branchModels = branchModels;*/
     }
 
     public Integer getId() {
@@ -38,7 +38,7 @@ public class RowStatusModel implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-
+/*
     public Set<LoanTypeModel> getLoanTypeModels() {
         return loanTypeModels;
     }
@@ -61,5 +61,5 @@ public class RowStatusModel implements Serializable {
 
     public void setBranchModels(Set<BranchModel> branchModels) {
         this.branchModels = branchModels;
-    }
+    }*/
 }

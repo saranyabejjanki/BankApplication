@@ -40,7 +40,7 @@ public class BranchMapper implements IBranchMapper {
             branchEntity.setAddress(addressMapper.convertModelToEntity(branchModel.getAddressModel()));
             branchEntity.setCreatedDate(branchModel.getCreatedDate());
             branchEntity.setRowStatus(rowStatusMapper.convertModelToEntity(branchModel.getRowStatusModel()));
-           /* if(nonNull(branchModel.getCustomerModels())) {
+            if(nonNull(branchModel.getCustomerModels())) {
                 Set<Customer> customers = branchModel.getCustomerModels().stream().map(customer -> {
                     Customer customerEntity = customerMapper.convertModelToEntity(customer);
                     return customerEntity;
@@ -54,7 +54,7 @@ public class BranchMapper implements IBranchMapper {
                 }).collect(Collectors.toSet());
                 branchEntity.setUsers(users);
             }
-*/
+
         }
         return branchEntity;
 
@@ -71,7 +71,7 @@ public class BranchMapper implements IBranchMapper {
             branchModel.setAddressModel(addressMapper.convertEntityToModel(branchEntity.getAddress()));
             branchModel.setCreatedDate(branchEntity.getCreatedDate());
             branchModel.setRowStatusModel(rowStatusMapper.convertEntityToModel(branchEntity.getRowStatus()));
-           /* if(nonNull(branchEntity.getCustomers())) {
+           if(nonNull(branchEntity.getCustomers())) {
                 Set<CustomerModel> customers = branchEntity.getCustomers().stream().map(customerEntity -> {
                     CustomerModel customerModel = customerMapper.convertEntityToModel(customerEntity);
                     return customerModel;
@@ -85,7 +85,6 @@ public class BranchMapper implements IBranchMapper {
                 }).collect(Collectors.toSet());
                 branchModel.setUserModels(users);
             }
-*/
         }
         return branchModel;
     }

@@ -18,6 +18,7 @@ public class User  implements Serializable {
     private String email;
     private String password;
     private String gender;
+
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;

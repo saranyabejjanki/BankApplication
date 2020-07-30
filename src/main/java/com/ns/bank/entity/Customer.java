@@ -71,12 +71,13 @@ public class Customer  implements Serializable {
         this.name = name;
     }
 
+    @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     public Date getDob() {
         return dob;
     }
 
-    @CreationTimestamp
+
     public void setDob(Date dob) {
         this.dob = dob;
     }
@@ -128,7 +129,7 @@ public class Customer  implements Serializable {
         this.confirmPassword = confirmPassword;
     }
 
-    @JsonManagedReference
+   // @JsonManagedReference
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinColumn(name = "branchId")
     public Branch getBranchName() {
@@ -149,12 +150,13 @@ public class Customer  implements Serializable {
         this.status = status;
     }
 
+    @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     public Date getAccountCreatedDate() {
         return accountCreatedDate;
     }
 
-    @CreationTimestamp
+
     public void setAccountCreatedDate(Date accountCreatedDate) {
         this.accountCreatedDate = accountCreatedDate;
     }
@@ -170,7 +172,7 @@ public class Customer  implements Serializable {
     }
 
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "customer")
-    @JsonBackReference
+ //   @JsonBackReference
 
     public Set<Deposit> getDeposits() {
         return deposits;
@@ -180,7 +182,7 @@ public class Customer  implements Serializable {
         this.deposits = deposits;
     }
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "customer")
-    @JsonBackReference
+    //@JsonBackReference
     public Set<Withdraw> getWithdraws() {
         return withdraws;
     }
@@ -189,7 +191,7 @@ public class Customer  implements Serializable {
         this.withdraws = withdraws;
     }
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "customer")
-    @JsonBackReference
+    //@JsonBackReference
     public Set<Transfer> getTransfers() {
         return transfers;
     }

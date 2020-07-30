@@ -12,11 +12,11 @@ public class Eligibility {
     private Integer id;
 
     @OneToMany(mappedBy = "eligibilityId",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JsonBackReference
+   // @JsonBackReference
     private Set<AccountType> accountTypes;
 
     @OneToMany(mappedBy = "eligibility",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JsonBackReference
+   // @JsonBackReference
     private Set<LoanType> loanTypes;
     private Integer minAge;
     private Integer maxAge;

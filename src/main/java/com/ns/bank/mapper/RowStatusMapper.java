@@ -12,7 +12,7 @@ public class RowStatusMapper implements IRowStatusMapper {
     public RowStatus convertModelToEntity(RowStatusModel rowStatusModel) {
 
             RowStatus rowStatus =new RowStatus();
-            if(Objects.nonNull(rowStatusModel.getId())){
+           if(Objects.nonNull(rowStatusModel.getId())){
                 rowStatus.setId(rowStatusModel.getId());
             }
             rowStatus.setName(rowStatusModel.getName());

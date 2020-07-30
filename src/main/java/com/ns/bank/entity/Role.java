@@ -16,7 +16,7 @@ public class Role  implements Serializable {
     private String name;
 
     @OneToMany(mappedBy = "role",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JsonBackReference
+  //  @JsonBackReference
     private Set<User> users;
 
     public Role() {

@@ -95,18 +95,18 @@ public class Address  implements Serializable {
         this.customers = customers;
     }
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "address")
-    @JsonBackReference
+    //@JsonBackReference
     public Set<Branch> getBranches() {
         return branches;
     }
 
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "address")
-    @JsonBackReference
+   // @JsonBackReference
     public Set<User> getUsers() {
         return users;
     }
 
-    @JsonBackReference
+    //@JsonBackReference
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "address")
     public Set<Customer> getCustomers() {
         return customers;

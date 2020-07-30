@@ -15,15 +15,15 @@ public class RowStatus  implements Serializable {
     private String name;
 
     @OneToMany(mappedBy = "rowStatus",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JsonBackReference
+    //@JsonBackReference
     private Set<LoanType> loanTypes;
 
     @OneToMany(mappedBy = "rowStatus",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JsonBackReference
+   // @JsonBackReference
     private Set<User> users;
 
     @OneToMany(mappedBy = "rowStatus",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JsonBackReference
+    //@JsonBackReference
     private Set<Branch> branches;
 
 

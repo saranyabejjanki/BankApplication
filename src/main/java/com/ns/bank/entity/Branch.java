@@ -67,7 +67,7 @@ public class Branch  implements Serializable {
     }
 
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "branch")
-    @JsonBackReference(value="branch-users")
+    //@JsonBackReference(value="branch-users")
     public Set<User> getUsers() {
         return users;
     }
@@ -86,7 +86,7 @@ public class Branch  implements Serializable {
     }
 
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy="branchName")
-    @JsonBackReference(value="branch-customers")
+    //@JsonBackReference(value="branch-customers")
     public Set<Customer> getCustomers() {
         return customers;
     }
@@ -95,14 +95,14 @@ public class Branch  implements Serializable {
         this.customers = customers;
     }
 
-
+    @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "CreatedDate")
     public Date getCreatedDate() {
         return createdDate;
     }
 
-    @CreationTimestamp
+
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }

@@ -33,10 +33,10 @@ public class BranchController {
 
 
     @GetMapping(path = "/{branch-code}")
-    public ResponseEntity<?> fetchBranchByCode(@PathVariable("branch-code") Long branchCode) throws Exception {
+    public ResponseEntity<BranchModel> fetchBranchByCode(@PathVariable("branch-code") Long branchCode) throws Exception {
         if (branchService.checkIfBranchExists(branchCode)) {
             BranchModel branchModel = branchService.fetchBranchByCode(branchCode);
-            return new ResponseEntity<>(branchModel, HttpStatus.OK);
+            return new ResponseEntity<BranchModel>(branchModel, HttpStatus.OK);
         } else {
             //throw new UserNotFoundException("user id '" + userId + "' does not exist"); }
             return null;
@@ -61,8 +61,7 @@ public class BranchController {
     }
 
 
-
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, headers = "Accept=application/json")
+    @PostMapping(consumes ={"application/json"})
     public ResponseEntity<?> createBranch(@RequestBody BranchModel branchModel) throws Exception {
         HttpStatus status;
         BranchModel branch = branchService.saveBranch(branchModel);

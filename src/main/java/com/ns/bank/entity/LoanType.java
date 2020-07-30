@@ -29,7 +29,7 @@ public class LoanType  implements Serializable {
     private RowStatus rowStatus;
 
     @OneToMany(mappedBy = "loanType", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonBackReference
+    //@JsonBackReference
     private Set<Loan> loans;
 
     @ManyToOne(cascade = CascadeType.MERGE)

@@ -38,7 +38,7 @@ public class Loan  implements Serializable {
     }
 
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "loan")
-    @JsonBackReference
+    //@JsonBackReference
     public Set<Customer> getCustomers() {
         return customers;
     }

@@ -57,21 +57,22 @@ public class Complaint  implements Serializable {
         this.status = status;
     }
 
-
+    @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     public Date getRaisedDate() {
         return raisedDate;
     }
-    @CreationTimestamp
+
     public void setRaisedDate(Date raisedDate) {
         this.raisedDate = raisedDate;
     }
 
+    @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     public Date getUpdatedDate() {
         return updatedDate;
     }
-    @UpdateTimestamp
+
     public void setUpdatedDate(Date updatedDate) {
         this.updatedDate = updatedDate;
     }

@@ -53,6 +53,7 @@ public class BranchService implements IBranchService {
         Optional<Branch> branchEntity=branchRepository.findById(branchCode);
         BranchModel branchModel=new BranchModel();
         if(Objects.nonNull(branchEntity))
+            System.out.println("Date"+branchEntity.get().getCreatedDate());
             branchModel=branchMapper.convertEntityToModel(branchEntity.get());
 
         return branchModel;

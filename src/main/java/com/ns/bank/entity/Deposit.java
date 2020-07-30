@@ -47,12 +47,12 @@ public class Deposit  implements Serializable {
         this.depositAmount = depositAmount;
     }
 
-
+    @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     public Date getTransactionDate() {
         return transactionDate;
     }
-    @CreationTimestamp
+
     public void setTransactionDate(Date transactionDate) {
         this.transactionDate = transactionDate;
     }
