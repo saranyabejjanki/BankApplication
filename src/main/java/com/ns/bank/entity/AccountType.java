@@ -1,6 +1,7 @@
 package com.ns.bank.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,7 +17,7 @@ public class AccountType  implements Serializable {
     private Double minBalance;
     private Double withdrawLimit;
     private Integer transactionLimit;
-    private Eligibility eligibility;
+    private Eligibility eligibilityId;
     private Set<LoanType> loanTypes;
 
     public AccountType() {
@@ -25,14 +26,14 @@ public class AccountType  implements Serializable {
 
     public AccountType(Long id, String name, Set<LoanType> loanTypes,Float interest, Double minBalance,
                        Double withdrawLimit,
-                       Integer transactionLimit, Eligibility eligibility) {
+                       Integer transactionLimit, Eligibility eligibilityId) {
         this.id = id;
         this.name = name;
         this.interest = interest;
         this.minBalance = minBalance;
         this.withdrawLimit = withdrawLimit;
         this.transactionLimit = transactionLimit;
-        this.eligibility = eligibility;
+        this.eligibilityId = eligibilityId;
         this.loanTypes = loanTypes;
     }
 
@@ -88,18 +89,18 @@ public class AccountType  implements Serializable {
         this.transactionLimit = transactionLimit;
     }
 
+
     @ManyToOne(cascade=CascadeType.MERGE,fetch = FetchType.LAZY)
     @JoinColumn(name = "eligibilityId")
-    public Eligibility getEligibility() {
-        return eligibility;
+    public Eligibility getEligibilityId() {
+        return eligibilityId;
     }
 
-    public void setEligibility(Eligibility eligibility) {
-        this.eligibility = eligibility;
+    public void setEligibilityId(Eligibility eligibilityId) {
+        this.eligibilityId = eligibilityId;
     }
 
     @OneToMany(mappedBy = "accountType",cascade=CascadeType.ALL,fetch = FetchType.LAZY)
-    @JsonBackReference
     public Set<LoanType> getLoanTypes() {
         return loanTypes;
     }

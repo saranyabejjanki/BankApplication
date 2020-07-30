@@ -1,6 +1,7 @@
 package com.ns.bank.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -20,7 +21,7 @@ public class Customer  implements Serializable {
     private Long accountNo;
     private String password;
     private String confirmPassword;
-    private Branch branch;
+    private Branch branchName;
     private Status status;
     private Date accountCreatedDate;
     private AccountType accountType;
@@ -32,7 +33,7 @@ public class Customer  implements Serializable {
     public Customer() {
     }
 
-    public Customer(Long id, String name, Date dob, Address address, String email, Long accountNo, String password, String confirmPassword, Branch branch, Status status, Date accountCreatedDate, AccountType accountType, Set<Deposit> deposits, Set<Withdraw> withdraws, Set<Transfer> transfers, Loan loan) {
+    public Customer(Long id, String name, Date dob, Address address, String email, Long accountNo, String password, String confirmPassword, Branch branchName, Status status, Date accountCreatedDate, AccountType accountType, Set<Deposit> deposits, Set<Withdraw> withdraws, Set<Transfer> transfers, Loan loan) {
         this.id = id;
         this.name = name;
         this.dob = dob;
@@ -41,7 +42,7 @@ public class Customer  implements Serializable {
         this.accountNo = accountNo;
         this.password = password;
         this.confirmPassword = confirmPassword;
-        this.branch = branch;
+        this.branchName = branchName;
         this.status = status;
         this.accountCreatedDate = accountCreatedDate;
         this.accountType = accountType;
@@ -80,7 +81,9 @@ public class Customer  implements Serializable {
         this.dob = dob;
     }
 
-    @Column(name = "address")
+
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @JoinColumn(name = "addressId")
     public Address getAddress() {
         return address;
     }
@@ -125,14 +128,15 @@ public class Customer  implements Serializable {
         this.confirmPassword = confirmPassword;
     }
 
+    @JsonManagedReference
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-    @JoinColumn(name = "branchId", nullable = false)
-    public Branch getBranch() {
-        return branch;
+    @JoinColumn(name = "branchId")
+    public Branch getBranchName() {
+        return branchName;
     }
 
-    public void setBranch(Branch branch) {
-        this.branch = branch;
+    public void setBranchName(Branch branchName) {
+        this.branchName = branchName;
     }
 
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
@@ -156,7 +160,7 @@ public class Customer  implements Serializable {
     }
 
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-    @JoinColumn(name = "accountTypeId", nullable = false)
+    @JoinColumn(name = "accountTypeId")
     public AccountType getAccountType() {
         return accountType;
     }
@@ -167,6 +171,7 @@ public class Customer  implements Serializable {
 
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "customer")
     @JsonBackReference
+
     public Set<Deposit> getDeposits() {
         return deposits;
     }

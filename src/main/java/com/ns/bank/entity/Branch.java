@@ -1,6 +1,7 @@
 package com.ns.bank.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -55,7 +56,8 @@ public class Branch  implements Serializable {
         this.name = name;
     }
 
-    @Column(name = "address")
+    @ManyToOne(cascade=CascadeType.MERGE,fetch = FetchType.LAZY)
+    @JoinColumn(name = "addressId")
     public Address getAddress() {
         return address;
     }
@@ -65,7 +67,7 @@ public class Branch  implements Serializable {
     }
 
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "branch")
-    @JsonBackReference
+    @JsonBackReference(value="branch-users")
     public Set<User> getUsers() {
         return users;
     }
@@ -83,8 +85,8 @@ public class Branch  implements Serializable {
         this.phoneNo = phoneNo;
     }
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "branch")
-    @JsonBackReference
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy="branchName")
+    @JsonBackReference(value="branch-customers")
     public Set<Customer> getCustomers() {
         return customers;
     }

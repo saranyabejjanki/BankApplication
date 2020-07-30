@@ -1,24 +1,19 @@
 package com.ns.bank.service;
 
-import com.ns.bank.entity.Branch;
-import com.ns.bank.entity.Customer;
-import com.ns.bank.entity.RowStatus;
-import com.ns.bank.model.AddressModel;
-import com.ns.bank.model.BranchModel;
-import org.apache.catalina.User;
-import org.springframework.data.jpa.repository.Query;
+import com.ns.bank.entity.User;
+import com.ns.bank.model.*;
+
 
 import java.util.List;
-import java.util.Optional;
 
 public interface IBranchService {
-    List<Branch> fetchAllBranches();
+    List<BranchModel> fetchAllBranches();
     Boolean checkIfBranchExists(Long branchCode);
-    Optional<Branch> fetchBranchByCode(Long branchCode);
-    Branch  saveBranch(Branch branchModel);
-    Branch updateBranch(Branch branchModel);
+    BranchModel fetchBranchByCode(Long branchCode);
+    BranchModel  saveBranch(BranchModel branchModel);
+    BranchModel updateBranch(BranchModel branchModel);
     Boolean deleteBranchByBranchCode(Long branchCode);
-    public List<User> getAllUsersByBranchCode(Long branchCode);
-    public List<Customer> getAllCustomersByBranchCode(Long branchCode);
-    public List<RowStatus> getAllUsersByRowStatusId(Long rowStatusId);
+    public List<UserModel> getAllUsersByBranchCode(Long branchCode);
+    public List<CustomerModel> getAllCustomersByBranchCode(Long branchCode);
+    public List<UserModel> getAllUsersByRowStatusId(Long rowStatusId);
 }

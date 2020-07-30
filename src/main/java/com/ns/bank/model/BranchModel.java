@@ -16,10 +16,9 @@ public class BranchModel implements Serializable {
     private Date createdDate;
     private RowStatusModel rowStatusModel;
 
-
-
     public BranchModel() {
     }
+
 
     public BranchModel(Long branchCode, String name, AddressModel addressModel, Set<UserModel> userModels, Long phoneNo, Set<CustomerModel> customerModels, Date createdDate, RowStatusModel rowStatusModel) {
         this.branchCode = branchCode;

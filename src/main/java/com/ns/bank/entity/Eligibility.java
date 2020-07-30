@@ -11,7 +11,7 @@ public class Eligibility {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToMany(mappedBy = "eligibility",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "eligibilityId",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JsonBackReference
     private Set<AccountType> accountTypes;
 

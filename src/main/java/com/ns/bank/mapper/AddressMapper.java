@@ -6,12 +6,17 @@ import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 
+import static java.util.Objects.nonNull;
+
 @Component
 public class AddressMapper implements IAddressMapper {
     @Override
     public Address convertModelToEntity(AddressModel addressModel) {
       Address addressEntity =new Address();
-        if(Objects.nonNull(addressModel)) {
+        if(nonNull(addressModel)) {
+            if(nonNull(addressModel.getId())) {
+                addressEntity.setId(addressModel.getId());
+            }
             addressEntity.setCity(addressModel.getCity());
             addressEntity.setState(addressModel.getState());
             addressEntity.setCountry(addressModel.getCountry());
@@ -24,7 +29,7 @@ public class AddressMapper implements IAddressMapper {
     @Override
     public AddressModel convertEntityToModel(Address addressEntity) {
         AddressModel addressModel=new AddressModel();
-        if(Objects.nonNull(addressEntity)) {
+        if(nonNull(addressEntity)) {
             addressModel.setId(addressEntity.getId());
             addressModel.setCity(addressEntity.getCity());
             addressModel.setCountry(addressEntity.getCountry());

@@ -1,6 +1,11 @@
 package com.ns.bank.model;
 
+import com.ns.bank.entity.Branch;
+import com.ns.bank.entity.Customer;
+import com.ns.bank.entity.User;
+
 import java.io.Serializable;
+import java.util.Set;
 
 public class AddressModel implements Serializable {
     private Long id;
@@ -9,7 +14,33 @@ public class AddressModel implements Serializable {
     private String country;
     private Integer pinCode;
     private String  street;
+    private Set<Branch> branches;
+    private Set<User> users;
+    private Set<Customer> customers;
 
+    public Set<Branch> getBranches() {
+        return branches;
+    }
+
+    public void setBranches(Set<Branch> branches) {
+        this.branches = branches;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+
+    public Set<Customer> getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(Set<Customer> customers) {
+        this.customers = customers;
+    }
 
     public AddressModel() {
     }
@@ -21,6 +52,18 @@ public class AddressModel implements Serializable {
         this.country = country;
         this.pinCode = pinCode;
         this.street = street;
+    }
+
+    public AddressModel(Long id, String city, String state, String country, Integer pinCode, String street, Set<Branch> branches, Set<User> users, Set<Customer> customers) {
+        this.id = id;
+        this.city = city;
+        this.state = state;
+        this.country = country;
+        this.pinCode = pinCode;
+        this.street = street;
+        this.branches = branches;
+        this.users = users;
+        this.customers = customers;
     }
 
     public Long getId() {

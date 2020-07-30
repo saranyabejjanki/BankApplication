@@ -1,7 +1,11 @@
 package com.ns.bank.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name="address")
@@ -12,7 +16,9 @@ public class Address  implements Serializable {
     private String country;
     private Integer pinCode;
     private String  street;
-
+    private Set<Branch> branches;
+    private Set<User> users;
+    private Set<Customer> customers;
 
     public Address() {
     }
@@ -75,5 +81,34 @@ public class Address  implements Serializable {
 
     public void setStreet(String street) {
         this.street = street;
+    }
+
+    public void setBranches(Set<Branch> branches) {
+        this.branches = branches;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+
+    public void setCustomers(Set<Customer> customers) {
+        this.customers = customers;
+    }
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "address")
+    @JsonBackReference
+    public Set<Branch> getBranches() {
+        return branches;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "address")
+    @JsonBackReference
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    @JsonBackReference
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "address")
+    public Set<Customer> getCustomers() {
+        return customers;
     }
 }

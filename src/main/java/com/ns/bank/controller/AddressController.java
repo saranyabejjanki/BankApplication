@@ -28,7 +28,7 @@ public class AddressController {
 
 
     @GetMapping(path = "/{address-id}")
-    public ResponseEntity<?> fetchUserById(@PathVariable("address-id") Long addressId) throws Exception {
+    public ResponseEntity<?> fetchAddressById(@PathVariable("address-id") Long addressId) throws Exception {
         if (addressService.checkIfAddressExists(addressId)) {
             AddressModel addressModel = addressService.fetchAddressById(addressId);
             return new ResponseEntity<>(addressModel, HttpStatus.OK);
@@ -39,7 +39,7 @@ public class AddressController {
     }
 
     @RequestMapping(method=RequestMethod.POST)
-    public ResponseEntity<?> createUser(@RequestBody AddressModel addressModel) throws Exception {
+    public ResponseEntity<?> createAddress(@RequestBody AddressModel addressModel) throws Exception {
         HttpStatus status;
         AddressModel address = addressService.saveAddress(addressModel);
         System.out.println(address);
@@ -48,7 +48,7 @@ public class AddressController {
     }
 
     @PutMapping(path="/{address-id}")
-    public ResponseEntity<?> updateUser(@PathVariable("address-id") Long addressId,@RequestBody AddressModel addressModel) throws Exception{
+    public ResponseEntity<?> updateAddress(@PathVariable("address-id") Long addressId,@RequestBody AddressModel addressModel) throws Exception{
         HttpStatus status;
         if(addressService.checkIfAddressExists(addressId)){
             AddressModel address= addressService.updateAddress(addressModel);

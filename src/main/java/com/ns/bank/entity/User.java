@@ -26,6 +26,7 @@ public class User  implements Serializable {
     @JoinColumn(name = "addressId")
     private Address address;
 
+
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "branchId")
     private Branch branch;
