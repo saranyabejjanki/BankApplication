@@ -58,7 +58,6 @@ public class Customer  implements Serializable {
         this.withdraws = withdraws;
         this.transfers = transfers;
         this.loans = loans;
-
     }
 
     @Id

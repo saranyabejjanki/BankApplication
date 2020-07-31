@@ -101,7 +101,7 @@ public class UserController {
 
     @GetMapping(path = "/branch/{branch-id}")
     public ResponseEntity<?> getAllUsersByBranchId(@PathVariable("branch-id") Long branchId){
-        List<UserModel> userModels = userService.getAllUsersByRoleId(branchId);
+        List<UserModel> userModels = userService.getAllUsersByBranchId(branchId);
         return  new  ResponseEntity<>(userModels,userModels.size()>0 ? HttpStatus.OK : HttpStatus.NO_CONTENT);
     }
 
