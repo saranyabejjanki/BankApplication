@@ -28,12 +28,15 @@ public class Customer  implements Serializable {
     private Set<Deposit> deposits;
     private Set<Withdraw> withdraws;
     private Set<Transfer> transfers;
-    private Loan loan;
+    private Set<Loan> loans;
 
     public Customer() {
     }
 
-    public Customer(Long id, String name, Date dob, Address address, String email, Long accountNo, String password, String confirmPassword, Branch branchName, Status status, Date accountCreatedDate, AccountType accountType, Set<Deposit> deposits, Set<Withdraw> withdraws, Set<Transfer> transfers, Loan loan) {
+    public Customer(Long id, String name, Date dob, Address address, String email, Long accountNo, String password,
+                    String confirmPassword, Branch branchName, Status status, Date accountCreatedDate,
+                    AccountType accountType, Set<Deposit> deposits, Set<Withdraw> withdraws, Set<Transfer> transfers,
+                    Set<Loan> loans) {
         this.id = id;
         this.name = name;
         this.dob = dob;
@@ -49,7 +52,7 @@ public class Customer  implements Serializable {
         this.deposits = deposits;
         this.withdraws = withdraws;
         this.transfers = transfers;
-        this.loan = loan;
+        this.loans = loans;
     }
 
     @Id
@@ -201,13 +204,12 @@ public class Customer  implements Serializable {
     }
 
 
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-    @JoinColumn(name = "loanId", nullable = false)
-    public Loan getLoan() {
-        return loan;
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "customer")
+    public Set<Loan> getLoans() {
+        return loans;
     }
 
-    public void setLoan(Loan loan) {
-        this.loan = loan;
+    public void setLoans(Set<Loan> loans) {
+        this.loans = loans;
     }
 }

@@ -8,7 +8,7 @@ public class RoleModel implements Serializable {
 
     private Integer id;
     private String name;
-    private Set<UserModel> userModels;
+   // private Set<UserModel> userModels;
 
     public RoleModel() {
     }
@@ -29,17 +29,17 @@ public class RoleModel implements Serializable {
         this.name = name;
     }
 
-    public Set<UserModel> getUserModels() {
+  /* public Set<UserModel> getUserModels() {
         return userModels;
     }
 
-    public void setUserModels(Set<UserModel> userModels) {
+   public void setUserModels(Set<UserModel> userModels) {
         this.userModels = userModels;
     }
-
-    public RoleModel(Integer id, String name, Set<UserModel> userModels) {
+*/
+    public RoleModel(Integer id, String name) {
         this.id = id;
         this.name = name;
-        this.userModels = userModels;
+     //   this.userModels = userModels;
     }
 }

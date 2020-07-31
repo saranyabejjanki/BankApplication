@@ -6,17 +6,17 @@ import java.util.Set;
 public class LoanModel implements Serializable {
 
     private Long id;
-    private Set<CustomerModel> customerModels;
-    private  Double loanAmount;
+    private CustomerModel customerModel;
+    private Double loanAmount;
     private StatusModel statusModel;
     private LoanTypeModel loanTypeModel;
 
     public LoanModel() {
     }
 
-    public LoanModel(Long id, Set<CustomerModel> customerModels, Double loanAmount, StatusModel statusModel, LoanTypeModel loanTypeModel) {
+    public LoanModel(Long id, CustomerModel customerModel, Double loanAmount, StatusModel statusModel, LoanTypeModel loanTypeModel) {
         this.id = id;
-        this.customerModels = customerModels;
+        this.customerModel = customerModel;
         this.loanAmount = loanAmount;
         this.statusModel = statusModel;
         this.loanTypeModel = loanTypeModel;
@@ -30,12 +30,12 @@ public class LoanModel implements Serializable {
         this.id = id;
     }
 
-    public Set<CustomerModel> getCustomerModels() {
-        return customerModels;
+    public CustomerModel getCustomerModel() {
+        return customerModel;
     }
 
-    public void setCustomerModels(Set<CustomerModel> customerModels) {
-        this.customerModels = customerModels;
+    public void setCustomerModel(CustomerModel customerModel) {
+        this.customerModel = customerModel;
     }
 
     public Double getLoanAmount() {

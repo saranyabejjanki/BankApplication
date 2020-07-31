@@ -11,7 +11,7 @@ import java.util.Set;
 public class Loan  implements Serializable {
 
     private Long id;
-    private Set<Customer> customers;
+    private Customer customer;
     private  Double loanAmount;
     private Status status;
     private LoanType loanType;
@@ -19,9 +19,9 @@ public class Loan  implements Serializable {
     public Loan() {
     }
 
-    public Loan(Long id, Set<Customer> customers, Double loanAmount, Status status, LoanType loanType) {
+    public Loan(Long id, Customer customer, Double loanAmount, Status status, LoanType loanType) {
         this.id = id;
-        this.customers = customers;
+        this.customer = customer;
         this.loanAmount = loanAmount;
         this.status = status;
         this.loanType = loanType;
@@ -37,14 +37,14 @@ public class Loan  implements Serializable {
         this.id = id;
     }
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "loan")
-    //@JsonBackReference
-    public Set<Customer> getCustomers() {
-        return customers;
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @JoinColumn(name = "customeId", nullable = false)
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setCustomers(Set<Customer> customers) {
-        this.customers = customers;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
     @Column(name = "loanAmount")
     public Double getLoanAmount() {

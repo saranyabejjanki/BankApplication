@@ -8,7 +8,9 @@ import org.springframework.stereotype.Component;
 public class CustomerMapper  implements ICustomerMapper{
     @Override
     public Customer convertModelToEntity(CustomerModel customerModel) {
-        return null;
+        Customer customer = new Customer();
+        customer.setDob(customerModel.getDob());
+        return customer;
     }
 
     @Override

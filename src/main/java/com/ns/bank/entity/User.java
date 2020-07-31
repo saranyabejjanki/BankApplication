@@ -2,6 +2,7 @@ package com.ns.bank.entity;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.engine.internal.Cascade;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -26,7 +27,6 @@ public class User  implements Serializable {
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "addressId")
     private Address address;
-
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "branchId")

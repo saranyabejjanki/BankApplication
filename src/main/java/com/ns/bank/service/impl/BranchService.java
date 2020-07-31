@@ -131,7 +131,6 @@ public class BranchService implements IBranchService {
         List<CustomerModel>  customerModels=new ArrayList<>();
         customersEntities.forEach(customer->customerModels.add(customerMapper.convertEntityToModel((customer))));
         return customerModels;
-
     }
 
     @Override

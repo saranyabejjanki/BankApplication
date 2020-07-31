@@ -37,10 +37,12 @@ public class BranchMapper implements IBranchMapper {
             branchEntity.setBranchCode(branchModel.getBranchCode());
             branchEntity.setName(branchModel.getName());
             branchEntity.setPhoneNo(branchModel.getPhoneNo());
+            if(Objects.nonNull(branchModel.getAddressModel()))
             branchEntity.setAddress(addressMapper.convertModelToEntity(branchModel.getAddressModel()));
             branchEntity.setCreatedDate(branchModel.getCreatedDate());
+            if(Objects.nonNull(branchModel.getRowStatusModel()))
             branchEntity.setRowStatus(rowStatusMapper.convertModelToEntity(branchModel.getRowStatusModel()));
-            if(nonNull(branchModel.getCustomerModels())) {
+         /*   if(nonNull(branchModel.getCustomerModels())) {
                 Set<Customer> customers = branchModel.getCustomerModels().stream().map(customer -> {
                     Customer customerEntity = customerMapper.convertModelToEntity(customer);
                     return customerEntity;
@@ -55,6 +57,8 @@ public class BranchMapper implements IBranchMapper {
                 branchEntity.setUsers(users);
             }
 
+          */
+
         }
         return branchEntity;
 
@@ -68,10 +72,12 @@ public class BranchMapper implements IBranchMapper {
             branchModel.setBranchCode(branchEntity.getBranchCode());
             branchModel.setName(branchEntity.getName());
             branchModel.setPhoneNo(branchEntity.getPhoneNo());
+            if(Objects.nonNull(branchEntity.getAddress()))
             branchModel.setAddressModel(addressMapper.convertEntityToModel(branchEntity.getAddress()));
             branchModel.setCreatedDate(branchEntity.getCreatedDate());
+            if(Objects.nonNull(branchEntity.getRowStatus()))
             branchModel.setRowStatusModel(rowStatusMapper.convertEntityToModel(branchEntity.getRowStatus()));
-           if(nonNull(branchEntity.getCustomers())) {
+          /* if(nonNull(branchEntity.getCustomers())) {
                 Set<CustomerModel> customers = branchEntity.getCustomers().stream().map(customerEntity -> {
                     CustomerModel customerModel = customerMapper.convertEntityToModel(customerEntity);
                     return customerModel;
@@ -85,6 +91,7 @@ public class BranchMapper implements IBranchMapper {
                 }).collect(Collectors.toSet());
                 branchModel.setUserModels(users);
             }
+           */
         }
         return branchModel;
     }

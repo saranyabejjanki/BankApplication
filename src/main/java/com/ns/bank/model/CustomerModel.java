@@ -22,12 +22,12 @@ public class CustomerModel implements Serializable {
     private Set<DepositModel> depositModels;
     private Set<WithdrawModel> withdrawModels;
     private Set<TransferModel> transferModels;
-    private LoanModel loanModel;
+    private Set<LoanModel> loanModels;
 
     public CustomerModel() {
     }
 
-    public CustomerModel(Long id, String name, Date dob, AddressModel addressModel, String email, Long accountNo, String password, String confirmPassword, BranchModel branchModel, StatusModel statusModel, Date accountCreatedDate, AccountTypeModel accountTypeModel, Set<DepositModel> depositModels, Set<WithdrawModel> withdrawModels, Set<TransferModel> transferModels, LoanModel loanModel) {
+    public CustomerModel(Long id, String name, Date dob, AddressModel addressModel, String email, Long accountNo, String password, String confirmPassword, BranchModel branchModel, StatusModel statusModel, Date accountCreatedDate, AccountTypeModel accountTypeModel, Set<DepositModel> depositModels, Set<WithdrawModel> withdrawModels, Set<TransferModel> transferModels, Set<LoanModel> loanModels) {
         this.id = id;
         this.name = name;
         this.dob = dob;
@@ -43,7 +43,7 @@ public class CustomerModel implements Serializable {
         this.depositModels = depositModels;
         this.withdrawModels = withdrawModels;
         this.transferModels = transferModels;
-        this.loanModel = loanModel;
+        this.loanModels = loanModels;
     }
 
     public Long getId() {
@@ -166,11 +166,11 @@ public class CustomerModel implements Serializable {
         this.transferModels = transferModels;
     }
 
-    public LoanModel getLoanModel() {
-        return loanModel;
+    public Set<LoanModel> getLoanModels() {
+        return loanModels;
     }
 
-    public void setLoanModel(LoanModel loanModel) {
-        this.loanModel = loanModel;
+    public void setLoanModels(Set<LoanModel> loanModels) {
+        this.loanModels = loanModels;
     }
 }
