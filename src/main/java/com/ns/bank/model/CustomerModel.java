@@ -6,8 +6,6 @@ import java.util.Set;
 
 public class CustomerModel implements Serializable {
 
-
-    private Long id;
     private String name;
     private Date dob;
     private AddressModel addressModel;
@@ -27,8 +25,8 @@ public class CustomerModel implements Serializable {
     public CustomerModel() {
     }
 
-    public CustomerModel(Long id, String name, Date dob, AddressModel addressModel, String email, Long accountNo, String password, String confirmPassword, BranchModel branchModel, StatusModel statusModel, Date accountCreatedDate, AccountTypeModel accountTypeModel, Set<DepositModel> depositModels, Set<WithdrawModel> withdrawModels, Set<TransferModel> transferModels, Set<LoanModel> loanModels) {
-        this.id = id;
+    public CustomerModel( String name, Date dob, AddressModel addressModel, String email, Long accountNo, String password, String confirmPassword, BranchModel branchModel, StatusModel statusModel, Date accountCreatedDate, AccountTypeModel accountTypeModel, Set<DepositModel> depositModels, Set<WithdrawModel> withdrawModels, Set<TransferModel> transferModels, Set<LoanModel> loanModels) {
+
         this.name = name;
         this.dob = dob;
         this.addressModel = addressModel;
@@ -44,14 +42,6 @@ public class CustomerModel implements Serializable {
         this.withdrawModels = withdrawModels;
         this.transferModels = transferModels;
         this.loanModels = loanModels;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
