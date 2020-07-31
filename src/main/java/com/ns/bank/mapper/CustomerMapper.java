@@ -70,7 +70,6 @@ public class CustomerMapper  implements ICustomerMapper{
             customerModel.setAccountTypeModel(accountTypeMapper.convertEntityToModel(customerEntity.getAccountType()));
         if(Objects.nonNull(customerEntity.getStatus()))
             customerModel.setStatusModel(statusMapper.convertEntityToModel(customerEntity.getStatus()));
-
         return null;
     }
 }
