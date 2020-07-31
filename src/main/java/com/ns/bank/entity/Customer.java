@@ -9,16 +9,20 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
+@SequenceGenerator(
+        name="accountNumberGenerator",
+        initialValue=11111,allocationSize=1
+)
+
 @Entity
 @Table(name="customer")
 public class Customer  implements Serializable {
 
-    private Long id;
+    private Long accountNo;
     private String name;
     private Date dob;
     private Address address;
     private String email;
-    private Long accountNo;
     private String password;
     private String confirmPassword;
     private Branch branchName;
@@ -33,11 +37,11 @@ public class Customer  implements Serializable {
     public Customer() {
     }
 
-    public Customer(Long id, String name, Date dob, Address address, String email, Long accountNo, String password,
+    public Customer( String name, Date dob, Address address, String email, Long accountNo, String password,
                     String confirmPassword, Branch branchName, Status status, Date accountCreatedDate,
                     AccountType accountType, Set<Deposit> deposits, Set<Withdraw> withdraws, Set<Transfer> transfers,
-                    Set<Loan> loans) {
-        this.id = id;
+                    Set<Loan> loans){
+
         this.name = name;
         this.dob = dob;
         this.address = address;
@@ -53,16 +57,18 @@ public class Customer  implements Serializable {
         this.withdraws = withdraws;
         this.transfers = transfers;
         this.loans = loans;
+
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long getId() {
-        return id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "accountNumberGenerator")
+
+    public Long getAccountNo() {
+        return accountNo;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setAccountNo(Long accountNo) {
+        this.accountNo = accountNo;
     }
 
     @Column(name = "name")
@@ -105,14 +111,6 @@ public class Customer  implements Serializable {
         this.email = email;
     }
 
-    @Column(name = "accountNo")
-    public Long getAccountNo() {
-        return accountNo;
-    }
-
-    public void setAccountNo(Long accountNo) {
-        this.accountNo = accountNo;
-    }
 
     @Column(name = "password")
     public String getPassword() {
@@ -212,4 +210,6 @@ public class Customer  implements Serializable {
     public void setLoans(Set<Loan> loans) {
         this.loans = loans;
     }
+
+
 }

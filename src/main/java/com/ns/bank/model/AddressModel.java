@@ -14,7 +14,7 @@ public class AddressModel implements Serializable {
     private String country;
     private Integer pinCode;
     private String  street;
-   /* private Set<Branch> branches;
+  /*  private Set<Branch> branches;
     private Set<User> users;
     private Set<Customer> customers;
 
@@ -40,8 +40,8 @@ public class AddressModel implements Serializable {
 
     public void setCustomers(Set<Customer> customers) {
         this.customers = customers;
-    }*/
-
+    }
+*/
     public AddressModel() {
     }
 
@@ -61,7 +61,7 @@ public class AddressModel implements Serializable {
         this.country = country;
         this.pinCode = pinCode;
         this.street = street;
-       /* this.branches = branches;
+        /*this.branches = branches;
         this.users = users;
         this.customers = customers;*/
     }
