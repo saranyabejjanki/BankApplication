@@ -1,8 +1,6 @@
 package com.ns.bank.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -15,6 +13,7 @@ import java.util.Set;
         initialValue=11111,allocationSize=1
 )
 
+@JsonIgnoreProperties({"deposits","withdraws","transfers","loans","complaints"})
 @Entity
 @Table(name="customer")
 public class Customer  implements Serializable {
@@ -30,10 +29,17 @@ public class Customer  implements Serializable {
     private Status status;
     private Date accountCreatedDate;
     private AccountType accountType;
+
+    @JsonProperty("deposits")
     private Set<Deposit> deposits;
+    @JsonProperty("withdraws")
     private Set<Withdraw> withdraws;
+    @JsonProperty("transfers")
     private Set<Transfer> transfers;
+    @JsonProperty("loans")
     private Set<Loan> loans;
+    @JsonProperty("complaints")
+    private Set<Complaint> complaints;
 
     public Customer() {
     }
@@ -41,7 +47,7 @@ public class Customer  implements Serializable {
     public Customer( String name, Date dob, Address address, String email, Long accountNo, String password,
                     String confirmPassword, Branch branchName, Status status, Date accountCreatedDate,
                     AccountType accountType, Set<Deposit> deposits, Set<Withdraw> withdraws, Set<Transfer> transfers,
-                    Set<Loan> loans){
+                    Set<Loan> loans,Set<Complaint>complaints){
 
         this.name = name;
         this.dob = dob;
@@ -58,6 +64,8 @@ public class Customer  implements Serializable {
         this.withdraws = withdraws;
         this.transfers = transfers;
         this.loans = loans;
+        this.complaints=complaints;
+
     }
 
     @Id
@@ -212,4 +220,13 @@ public class Customer  implements Serializable {
     }
 
 
+
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "customer")
+    public Set<Complaint> getComplaints() {
+        return complaints;
+    }
+
+    public void setComplaints(Set<Complaint> complaints) {
+        this.complaints = complaints;
+    }
 }

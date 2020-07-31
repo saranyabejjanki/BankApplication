@@ -1,6 +1,5 @@
 package com.ns.bank.model;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -11,19 +10,19 @@ public class ComplaintModel implements Serializable {
     private StatusModel statusModel;
     private Date raisedDate;
     private Date updatedDate;
+    private CustomerModel customerModel;
 
     public ComplaintModel() {
     }
 
-    public ComplaintModel(Long id, String description, StatusModel statusModel, Date raisedDate, Date updatedDate) {
+    public ComplaintModel(Long id, String description, StatusModel statusModel, Date raisedDate, Date updatedDate,CustomerModel customerModel) {
         this.id = id;
         this.description = description;
         this.statusModel = statusModel;
         this.raisedDate = raisedDate;
         this.updatedDate = updatedDate;
+        this.customerModel= customerModel;
     }
-
-
     public Long getId() {
         return id;
     }
@@ -43,7 +42,6 @@ public class ComplaintModel implements Serializable {
     public StatusModel getStatusModel() {
         return statusModel;
     }
-
     public void setStatusModel(StatusModel statusModel) {
         this.statusModel = statusModel;
     }
@@ -62,5 +60,13 @@ public class ComplaintModel implements Serializable {
 
     public void setUpdatedDate(Date updatedDate) {
         this.updatedDate = updatedDate;
+    }
+
+    public CustomerModel getCustomerModel() {
+        return customerModel;
+    }
+
+    public void setCustomerModel(CustomerModel customerModel) {
+        this.customerModel = customerModel;
     }
 }

@@ -1,6 +1,5 @@
 package com.ns.bank.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -17,16 +16,18 @@ public class Complaint  implements Serializable {
     private Status status;
     private Date raisedDate;
     private Date updatedDate;
+    private Customer customer;
 
     public Complaint() {
     }
 
-    public Complaint(Long id, String description, Status status, Date raisedDate, Date updatedDate) {
+    public Complaint(Long id, String description, Status status, Date raisedDate, Date updatedDate,Customer customer) {
         this.id = id;
         this.description = description;
         this.status = status;
         this.raisedDate = raisedDate;
         this.updatedDate = updatedDate;
+        this.customer=customer;
     }
 
     @Id
@@ -77,4 +78,13 @@ public class Complaint  implements Serializable {
         this.updatedDate = updatedDate;
     }
 
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @JoinColumn(name = "accountNo")
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 }

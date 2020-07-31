@@ -17,15 +17,15 @@ public class CustomerModel implements Serializable {
     private StatusModel statusModel;
     private Date accountCreatedDate;
     private AccountTypeModel accountTypeModel;
-    private Set<DepositModel> depositModels;
+   /* private Set<DepositModel> depositModels;
     private Set<WithdrawModel> withdrawModels;
     private Set<TransferModel> transferModels;
-    private Set<LoanModel> loanModels;
+    private Set<LoanModel> loanModels;*/
 
     public CustomerModel() {
     }
 
-    public CustomerModel( String name, Date dob, AddressModel addressModel, String email, Long accountNo, String password, String confirmPassword, BranchModel branchModel, StatusModel statusModel, Date accountCreatedDate, AccountTypeModel accountTypeModel, Set<DepositModel> depositModels, Set<WithdrawModel> withdrawModels, Set<TransferModel> transferModels, Set<LoanModel> loanModels) {
+    public CustomerModel( String name, Date dob, AddressModel addressModel, String email, Long accountNo, String password, String confirmPassword, BranchModel branchModel, StatusModel statusModel, Date accountCreatedDate, AccountTypeModel accountTypeModel /* Set<DepositModel> depositModels, Set<WithdrawModel> withdrawModels, Set<TransferModel> transferModels, Set<LoanModel> loanModels*/) {
 
         this.name = name;
         this.dob = dob;
@@ -38,10 +38,10 @@ public class CustomerModel implements Serializable {
         this.statusModel = statusModel;
         this.accountCreatedDate = accountCreatedDate;
         this.accountTypeModel = accountTypeModel;
-        this.depositModels = depositModels;
+      /*  this.depositModels = depositModels;
         this.withdrawModels = withdrawModels;
         this.transferModels = transferModels;
-        this.loanModels = loanModels;
+        this.loanModels = loanModels;*/
     }
 
     public String getName() {
@@ -132,7 +132,7 @@ public class CustomerModel implements Serializable {
         this.accountTypeModel = accountTypeModel;
     }
 
-    public Set<DepositModel> getDepositModels() {
+   /* public Set<DepositModel> getDepositModels() {
         return depositModels;
     }
 
@@ -162,5 +162,5 @@ public class CustomerModel implements Serializable {
 
     public void setLoanModels(Set<LoanModel> loanModels) {
         this.loanModels = loanModels;
-    }
+    }*/
 }
