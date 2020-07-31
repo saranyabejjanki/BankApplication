@@ -9,21 +9,25 @@ import java.util.Objects;
 @Component
 public class EligibilityMapper {
 
-    public Eligibility convertModelToEntity(EligibilityModel eligibilityModel){
+    public Eligibility convertModelToEntity(EligibilityModel eligibilityModel) {
         Eligibility eligibility = new Eligibility();
-        eligibility.setMaxAge(eligibilityModel.getMaxAge());
-        eligibility.setMinAge(eligibilityModel.getMinAge());
-        if(Objects.nonNull(eligibilityModel.getId()))
-            eligibility.setId(eligibilityModel.getId());
+        if (Objects.nonNull(eligibilityModel)) {
+            if (Objects.nonNull(eligibilityModel.getId()))
+                eligibility.setId(eligibilityModel.getId());
+            eligibility.setMaxAge(eligibilityModel.getMaxAge());
+            eligibility.setMinAge(eligibilityModel.getMinAge());
+        }
         return eligibility;
     }
 
-    public EligibilityModel convertEntityToModel(Eligibility eligibility){
+    public EligibilityModel convertEntityToModel(Eligibility eligibility) {
         EligibilityModel eligibilityModel = new EligibilityModel();
-        if(Objects.nonNull(eligibility.getId()))
-            eligibilityModel.setId(eligibility.getId());
-        eligibilityModel.setMaxAge(eligibility.getMaxAge());
-        eligibilityModel.setMinAge(eligibility.getMinAge());
+        if (Objects.nonNull(eligibility)) {
+            if (Objects.nonNull(eligibility.getId()))
+                eligibilityModel.setId(eligibility.getId());
+            eligibilityModel.setMaxAge(eligibility.getMaxAge());
+            eligibilityModel.setMinAge(eligibility.getMinAge());
+        }
         return eligibilityModel;
     }
 }

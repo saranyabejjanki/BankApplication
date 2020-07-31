@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import java.util.Objects;
 
 @Component
-public class UserMapper implements  IUserMapper{
+public class UserMapper implements IUserMapper {
 
 
     @Autowired
@@ -29,8 +29,8 @@ public class UserMapper implements  IUserMapper{
     @Override
     public User convertModelToEntity(UserModel userModel) {
         User userEntity = new User();
-        if(Objects.nonNull(userModel)){
-            if(Objects.nonNull(userModel.getId())){
+        if (Objects.nonNull(userModel)) {
+            if (Objects.nonNull(userModel.getId())) {
                 userEntity.setId(userModel.getId());
             }
             userEntity.setName(userModel.getName());
@@ -38,19 +38,18 @@ public class UserMapper implements  IUserMapper{
             userEntity.setGender(userModel.getGender());
             userEntity.setPassword(userModel.getPassword());
             userEntity.setPhone(userModel.getPhone());
-            if(Objects.nonNull(userModel.getAddressModel())){
+            if (Objects.nonNull(userModel.getAddressModel())) {
                 userEntity.setAddress(addressMapper.convertModelToEntity(userModel.getAddressModel()));
             }
-            if(Objects.nonNull(userModel.getBranchModel())){
+            if (Objects.nonNull(userModel.getBranchModel())) {
                 userEntity.setBranch(branchMapper.convertModelToEntity(userModel.getBranchModel()));
             }
-            if(Objects.nonNull(userModel.getRoleModel())){
+            if (Objects.nonNull(userModel.getRoleModel())) {
                 userEntity.setRole(roleMapper.convertModelToEntity(userModel.getRoleModel()));
             }
-            if(Objects.nonNull(userModel.getRowStatusModel())) {
+            if (Objects.nonNull(userModel.getRowStatusModel())) {
                 userEntity.setRowStatus(rowStatusMapper.convertModelToEntity(userModel.getRowStatusModel()));
             }
-
         }
         return userEntity;
     }
@@ -58,8 +57,8 @@ public class UserMapper implements  IUserMapper{
     @Override
     public UserModel convertEntityToModel(User userEntity) {
         UserModel userModel = new UserModel();
-        if(Objects.nonNull(userEntity)){
-            if(Objects.nonNull(userEntity.getId())){
+        if (Objects.nonNull(userEntity)) {
+            if (Objects.nonNull(userEntity.getId())) {
                 userModel.setId(userEntity.getId());
             }
             userModel.setName(userEntity.getName());
@@ -68,16 +67,16 @@ public class UserMapper implements  IUserMapper{
             userModel.setPassword(userEntity.getPassword());
             userModel.setGender(userEntity.getGender());
             userModel.setPhone(userEntity.getPhone());
-            if(Objects.nonNull(userEntity.getAddress())){
+            if (Objects.nonNull(userEntity.getAddress())) {
                 userModel.setAddressModel(addressMapper.convertEntityToModel(userEntity.getAddress()));
             }
-            if(Objects.nonNull(userEntity.getBranch())){
+            if (Objects.nonNull(userEntity.getBranch())) {
                 userModel.setBranchModel(branchMapper.convertEntityToModel(userEntity.getBranch()));
             }
-            if(Objects.nonNull(userEntity.getRole())){
+            if (Objects.nonNull(userEntity.getRole())) {
                 userModel.setRoleModel(roleMapper.convertEntityToModel(userEntity.getRole()));
             }
-            if(Objects.nonNull(userEntity.getRowStatus())){
+            if (Objects.nonNull(userEntity.getRowStatus())) {
                 userModel.setRowStatusModel(rowStatusMapper.convertEntityToModel(userEntity.getRowStatus()));
             }
         }

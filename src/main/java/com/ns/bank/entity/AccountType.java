@@ -1,6 +1,7 @@
 package com.ns.bank.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -101,6 +102,7 @@ public class AccountType  implements Serializable {
     }
 
     @OneToMany(mappedBy = "accountType",cascade=CascadeType.ALL,fetch = FetchType.LAZY)
+
     public Set<LoanType> getLoanTypes() {
         return loanTypes;
     }

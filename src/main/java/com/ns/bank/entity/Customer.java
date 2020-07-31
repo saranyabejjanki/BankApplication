@@ -1,6 +1,7 @@
 package com.ns.bank.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -173,7 +174,7 @@ public class Customer  implements Serializable {
     }
 
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "customer")
- //   @JsonBackReference
+
 
     public Set<Deposit> getDeposits() {
         return deposits;
@@ -183,7 +184,7 @@ public class Customer  implements Serializable {
         this.deposits = deposits;
     }
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "customer")
-    //@JsonBackReference
+
     public Set<Withdraw> getWithdraws() {
         return withdraws;
     }
@@ -192,7 +193,7 @@ public class Customer  implements Serializable {
         this.withdraws = withdraws;
     }
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "customer")
-    //@JsonBackReference
+
     public Set<Transfer> getTransfers() {
         return transfers;
     }

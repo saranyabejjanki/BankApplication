@@ -10,20 +10,20 @@ import java.util.Objects;
 public class RowStatusMapper implements IRowStatusMapper {
     @Override
     public RowStatus convertModelToEntity(RowStatusModel rowStatusModel) {
-
-            RowStatus rowStatus =new RowStatus();
-           if(Objects.nonNull(rowStatusModel.getId())){
+        RowStatus rowStatus = new RowStatus();
+        if (Objects.nonNull(rowStatusModel)) {
+            if (Objects.nonNull(rowStatusModel.getId())) {
                 rowStatus.setId(rowStatusModel.getId());
             }
             rowStatus.setName(rowStatusModel.getName());
-            return rowStatus;
+        }
+        return rowStatus;
     }
-
     @Override
     public RowStatusModel convertEntityToModel(RowStatus rowStatus) {
         RowStatusModel rowStatusModel = new RowStatusModel();
-        if(Objects.nonNull(rowStatus)){
-            if(Objects.nonNull(rowStatus.getId())){
+        if (Objects.nonNull(rowStatus)) {
+            if (Objects.nonNull(rowStatus.getId())) {
                 rowStatusModel.setId(rowStatus.getId());
             }
             rowStatusModel.setName(rowStatus.getName());
