@@ -2,22 +2,31 @@ package com.ns.bank.mapper;
 
 import com.ns.bank.entity.Complaint;
 import com.ns.bank.model.ComplaintModel;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import static java.util.Objects.nonNull;
 @Component
 public class ComplaintMapper implements  IComplaintMapper {
+    @Autowired
+    private StatusMapper  statusMapper;
+
+    @Autowired
+    private  CustomerMapper customerMapper;
+
 
     @Override
-    public Complaint convertModelToEntity(ComplaintModel complainModel) {
+    public Complaint convertModelToEntity(ComplaintModel complaintModel) {
         Complaint complaint = new Complaint();
-        if (nonNull(complainModel)) {
-            if (nonNull(complainModel.getId())) {
-                complaint.setId(complainModel.getId());
+        if (nonNull(complaintModel)) {
+            if (nonNull(complaintModel.getId())) {
+                complaint.setId(complaintModel.getId());
             }
-            complaint.setDescription(complainModel.getDescription());
-            complaint.setRaisedDate(complainModel.getRaisedDate());
-            complaint.setUpdatedDate(complainModel.getUpdatedDate());
+            complaint.setDescription(complaintModel.getDescription());
+            complaint.setRaisedDate(complaintModel.getRaisedDate());
+            complaint.setUpdatedDate(complaintModel.getUpdatedDate());
+            complaint.setStatus(statusMapper.convertModelToEntity(complaintModel.getStatusModel()));
+            complaint.setCustomer(customerMapper.convertModelToEntity(complaintModel.getCustomerModel()));
         }
         return  complaint;
 
@@ -32,6 +41,8 @@ public class ComplaintMapper implements  IComplaintMapper {
             complaintModel.setDescription(complaintEntity.getDescription());
             complaintModel.setRaisedDate(complaintEntity.getRaisedDate());
             complaintModel.setUpdatedDate(complaintEntity.getUpdatedDate());
+            complaintModel.setStatusModel(statusMapper.convertEntityToModel(complaintEntity.getStatus()));
+            complaintModel.setCustomerModel(customerMapper.convertEntityToModel(complaintEntity.getCustomer()));
         }
         return complaintModel;
     }

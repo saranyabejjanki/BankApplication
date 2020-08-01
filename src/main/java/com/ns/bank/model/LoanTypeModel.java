@@ -13,14 +13,14 @@ public class LoanTypeModel implements Serializable {
     private Double minAmount;
     private Double maxAmount;
     private RowStatusModel rowStatusModel;
-    private Set<LoanModel> loanModels;
+   // private Set<LoanModel> loanModels;
     private AccountTypeModel accountTypeModel;
 
 
     public LoanTypeModel() {
     }
 
-    public LoanTypeModel(Integer id, String name, Double interest, Integer months, EligibilityModel eligibilityModel, Double minAmount, Double maxAmount, RowStatusModel rowStatusModel, Set<LoanModel> loanModels, AccountTypeModel accountTypeModel) {
+    public LoanTypeModel(Integer id, String name, Double interest, Integer months, EligibilityModel eligibilityModel, Double minAmount, Double maxAmount, RowStatusModel rowStatusModel, AccountTypeModel accountTypeModel) {
         this.id = id;
         this.name = name;
         this.interest = interest;
@@ -29,7 +29,6 @@ public class LoanTypeModel implements Serializable {
         this.minAmount = minAmount;
         this.maxAmount = maxAmount;
         this.rowStatusModel = rowStatusModel;
-        this.loanModels = loanModels;
         this.accountTypeModel = accountTypeModel;
     }
 
@@ -95,14 +94,6 @@ public class LoanTypeModel implements Serializable {
 
     public void setRowStatusModel(RowStatusModel rowStatusModel) {
         this.rowStatusModel = rowStatusModel;
-    }
-
-    public Set<LoanModel> getLoanModels() {
-        return loanModels;
-    }
-
-    public void setLoanModels(Set<LoanModel> loanModels) {
-        this.loanModels = loanModels;
     }
 
     public AccountTypeModel getAccountTypeModel() {

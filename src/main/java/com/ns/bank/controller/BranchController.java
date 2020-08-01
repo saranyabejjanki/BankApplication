@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static java.util.Objects.nonNull;
+
 @RestController
 @RequestMapping("/api/branches")
 public class BranchController {
@@ -27,29 +29,20 @@ public class BranchController {
     @RequestMapping(method= RequestMethod.GET)
     public ResponseEntity<List<BranchModel>> fetchAllBranches() {
         List<BranchModel> branchesList = branchService.fetchAllBranches();
-        return new ResponseEntity<List<BranchModel>>( branchesList, HttpStatus.OK);
+            return new ResponseEntity<List<BranchModel>>(branchesList, branchesList.size()!=0 ? HttpStatus.OK: HttpStatus.NO_CONTENT);
     }
-
-
 
     @GetMapping(path = "/{branch-code}")
     public ResponseEntity<BranchModel> fetchBranchByCode(@PathVariable("branch-code") Long branchCode) throws Exception {
         if (branchService.checkIfBranchExists(branchCode)) {
             BranchModel branchModel = branchService.fetchBranchByCode(branchCode);
             return new ResponseEntity<BranchModel>(branchModel, HttpStatus.OK);
-        } else {
-            //throw new UserNotFoundException("user id '" + userId + "' does not exist"); }
-            return null;
+        }
+        else {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
-    @GetMapping(path = "/{branch-code}/users")
-    public ResponseEntity<List<UserModel>> fetchAllUsersByCode(@PathVariable("branch-code") Long branchCode) throws Exception {
-        List<UserModel> users=new ArrayList<>();
-        if (branchService.checkIfBranchExists(branchCode)) {
-           users = branchService.getAllUsersByBranchCode(branchCode);
-        }
-        return new ResponseEntity<List<UserModel>>(users, HttpStatus.OK);
-    }
+
 
     @GetMapping(path = "/{branch-code}/customers")
     public ResponseEntity<List<CustomerModel>> fetchAllCustomersByCode(@PathVariable("branch-code") Long branchCode) throws Exception {
@@ -57,7 +50,7 @@ public class BranchController {
         if (branchService.checkIfBranchExists(branchCode)) {
             customers= branchService.getAllCustomersByBranchCode(branchCode);
         }
-        return new ResponseEntity<List<CustomerModel>>(customers, HttpStatus.OK);
+        return new ResponseEntity<List<CustomerModel>>(customers, customers.size()>0?HttpStatus.OK:HttpStatus.NO_CONTENT);
     }
 
 
@@ -66,7 +59,7 @@ public class BranchController {
         HttpStatus status;
         BranchModel branch = branchService.saveBranch(branchModel);
         System.out.println(branch);
-        status = Objects.nonNull(branch) ? HttpStatus.CREATED : HttpStatus.BAD_REQUEST;
+        status = nonNull(branch) ? HttpStatus.CREATED : HttpStatus.BAD_REQUEST;
         return new ResponseEntity<>(branch,status);
     }
 
@@ -75,7 +68,7 @@ public class BranchController {
         HttpStatus status;
         if(branchService.checkIfBranchExists(branchCode)){
            BranchModel branch= branchService.updateBranch(branchModel);
-            status = Objects.nonNull(branch) ? HttpStatus.OK: HttpStatus.BAD_REQUEST;
+            status = nonNull(branch) ? HttpStatus.OK: HttpStatus.BAD_REQUEST;
             return new ResponseEntity<>(status);
         }
         else{

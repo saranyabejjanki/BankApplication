@@ -8,9 +8,9 @@ public class EligibilityModel implements Serializable {
 
     private Integer id;
 
-    private Set<AccountTypeModel> accountTypeModels;
+    //private Set<AccountTypeModel> accountTypeModels;
 
-    private Set<LoanTypeModel> loanTypeModels;
+   // private Set<LoanTypeModel> loanTypeModels;
     private Integer minAge;
     private Integer maxAge;
 
@@ -18,10 +18,8 @@ public class EligibilityModel implements Serializable {
     public EligibilityModel() {
     }
 
-    public EligibilityModel(Integer id, Set<AccountTypeModel> accountTypeModels, Set<LoanTypeModel> loanTypeModels, Integer minAge, Integer maxAge) {
+    public EligibilityModel(Integer id, Integer minAge, Integer maxAge) {
         this.id = id;
-        this.accountTypeModels = accountTypeModels;
-        this.loanTypeModels = loanTypeModels;
         this.minAge = minAge;
         this.maxAge = maxAge;
     }
@@ -34,21 +32,7 @@ public class EligibilityModel implements Serializable {
         this.id = id;
     }
 
-    public Set<AccountTypeModel> getAccountTypeModels() {
-        return accountTypeModels;
-    }
 
-    public void setAccountTypeModels(Set<AccountTypeModel> accountTypeModels) {
-        this.accountTypeModels = accountTypeModels;
-    }
-
-    public Set<LoanTypeModel> getLoanTypeModels() {
-        return loanTypeModels;
-    }
-
-    public void setLoanTypeModels(Set<LoanTypeModel> loanTypeModels) {
-        this.loanTypeModels = loanTypeModels;
-    }
 
     public Integer getMinAge() {
         return minAge;

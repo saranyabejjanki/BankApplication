@@ -13,4 +13,8 @@ public interface IComplaintService {
     ComplaintModel  saveComplaint(ComplaintModel complaintModel);
     ComplaintModel updateComplaint(ComplaintModel complaintModel);
     Boolean deleteComplaintById(Long complaintId);
+    List<ComplaintModel> fetchComplaintByStatusId(Long statusId);
+    List<ComplaintModel> fetchComplaintByAccountNumber(Long account_no);
+    ComplaintModel updateStatus(Long statusId,Long complaintId);
+
 }

@@ -15,13 +15,13 @@ public class AccountTypeModel implements Serializable {
     private Double withdrawLimit;
     private Integer transactionLimit;
     private EligibilityModel eligibilityModel;
-    private Set<LoanTypeModel> loanTypeModels;
+   // private Set<LoanTypeModel> loanTypeModels;
 
 
     public AccountTypeModel() {
     }
 
-    public AccountTypeModel(Long id, String name, Float interest, Double minBalance, Double withdrawLimit, Integer transactionLimit, EligibilityModel eligibilityModel, Set<LoanTypeModel> loanTypeModels) {
+    public AccountTypeModel(Long id, String name, Float interest, Double minBalance, Double withdrawLimit, Integer transactionLimit, EligibilityModel eligibilityModel/*, Set<LoanTypeModel> loanTypeModels*/) {
         this.id = id;
         this.name = name;
         this.interest = interest;
@@ -29,7 +29,7 @@ public class AccountTypeModel implements Serializable {
         this.withdrawLimit = withdrawLimit;
         this.transactionLimit = transactionLimit;
         this.eligibilityModel = eligibilityModel;
-        this.loanTypeModels = loanTypeModels;
+      //  this.loanTypeModels = loanTypeModels;
     }
 
     public Long getId() {
@@ -88,11 +88,11 @@ public class AccountTypeModel implements Serializable {
         this.eligibilityModel = eligibilityModel;
     }
 
-    public Set<LoanTypeModel> getLoanTypeModels() {
+  /*  public Set<LoanTypeModel> getLoanTypeModels() {
         return loanTypeModels;
     }
 
     public void setLoanTypeModels(Set<LoanTypeModel> loanTypeModels) {
         this.loanTypeModels = loanTypeModels;
-    }
+    }*/
 }

@@ -14,4 +14,5 @@ public interface ICustomerService {
     List<CustomerModel> getCustomersByBranchId(Long branchId);
     List<CustomerModel> getCustomersByAccountTypeId(Long accountTypeId);
 
+
 }

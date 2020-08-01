@@ -24,7 +24,6 @@ public class Customer  implements Serializable {
     private Address address;
     private String email;
     private String password;
-    private String confirmPassword;
     private Branch branchName;
     private Status status;
     private Date accountCreatedDate;
@@ -44,8 +43,7 @@ public class Customer  implements Serializable {
     public Customer() {
     }
 
-    public Customer( String name, Date dob, Address address, String email, Long accountNo, String password,
-                    String confirmPassword, Branch branchName, Status status, Date accountCreatedDate,
+    public Customer( String name, Date dob, Address address, String email, Long accountNo, String password, Branch branchName, Status status, Date accountCreatedDate,
                     AccountType accountType, Set<Deposit> deposits, Set<Withdraw> withdraws, Set<Transfer> transfers,
                     Set<Loan> loans,Set<Complaint>complaints){
 
@@ -55,7 +53,7 @@ public class Customer  implements Serializable {
         this.email = email;
         this.accountNo = accountNo;
         this.password = password;
-        this.confirmPassword = confirmPassword;
+
         this.branchName = branchName;
         this.status = status;
         this.accountCreatedDate = accountCreatedDate;
@@ -127,15 +125,6 @@ public class Customer  implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    @Transient
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
     }
 
    // @JsonManagedReference

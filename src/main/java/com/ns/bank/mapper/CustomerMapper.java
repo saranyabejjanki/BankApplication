@@ -28,7 +28,6 @@ public class CustomerMapper implements ICustomerMapper {
 
             customer.setDob(customerModel.getDob());
             customer.setAccountCreatedDate(customerModel.getAccountCreatedDate());
-            customer.setConfirmPassword(customerModel.getConfirmPassword());
             customer.setPassword(customerModel.getPassword());
             customer.setEmail(customerModel.getEmail());
             customer.setName(customerModel.getName());
@@ -58,7 +57,6 @@ public class CustomerMapper implements ICustomerMapper {
 
             customerModel.setDob(customerEntity.getDob());
             customerModel.setAccountCreatedDate(customerEntity.getAccountCreatedDate());
-            customerModel.setConfirmPassword(customerEntity.getConfirmPassword());
             customerModel.setPassword(customerEntity.getPassword());
             customerModel.setEmail(customerEntity.getEmail());
             customerModel.setName(customerEntity.getName());

@@ -22,7 +22,7 @@ public class AddressController {
     @RequestMapping(method= RequestMethod.GET)
     public ResponseEntity<List<AddressModel>> fetchAllAddresses() {
         List<AddressModel> addressList = addressService.fetchAllAddresses();
-        return new ResponseEntity<List<AddressModel>>(addressList, HttpStatus.OK);
+        return new ResponseEntity<List<AddressModel>>(addressList, addressList.size()!=0 ? HttpStatus.OK: HttpStatus.NO_CONTENT);
     }
 
 
@@ -32,9 +32,8 @@ public class AddressController {
         if (addressService.checkIfAddressExists(addressId)) {
             AddressModel addressModel = addressService.fetchAddressById(addressId);
             return new ResponseEntity<>(addressModel, HttpStatus.OK);
-        } else {
-            //throw new UserNotFoundException("user id '" + userId + "' does not exist"); }
-            return null;
+        }   else {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
 
@@ -67,7 +66,7 @@ public class AddressController {
         HttpStatus status;
         if (addressService.checkIfAddressExists(addressId)) {
             Boolean value = addressService.deleteAddressById(addressId);
-            status = value == true ? HttpStatus.NO_CONTENT : HttpStatus.NOT_ACCEPTABLE;
+            status = value == true ? HttpStatus.OK : HttpStatus.NOT_ACCEPTABLE;
             return new ResponseEntity<>(value, status);
         } else {
             //throw new AddressNotFoundException("User id '" + userId + "' does not exist");

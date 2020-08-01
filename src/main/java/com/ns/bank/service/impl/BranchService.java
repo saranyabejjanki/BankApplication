@@ -53,7 +53,7 @@ public class BranchService implements IBranchService {
         Optional<Branch> branchEntity=branchRepository.findById(branchCode);
         BranchModel branchModel=new BranchModel();
         if(Objects.nonNull(branchEntity))
-            System.out.println("Date"+branchEntity.get().getCreatedDate());
+          //  System.out.println("Date"+branchEntity.get().getCreatedDate());
             branchModel=branchMapper.convertEntityToModel(branchEntity.get());
 
         return branchModel;
@@ -83,7 +83,7 @@ public class BranchService implements IBranchService {
                 branch1.get().setAddress(addressMapper.convertModelToEntity(branchModel.getAddressModel()));
                 branch1.get().setCreatedDate(branchModel.getCreatedDate());
                 branch1.get().setRowStatus(rowStatusMapper.convertModelToEntity(branchModel.getRowStatusModel()));
-                if (nonNull(branchModel.getCustomerModels())) {
+             /*   if (nonNull(branchModel.getCustomerModels())) {
                     Set<Customer> customers = branchModel.getCustomerModels().stream().map(customer -> {
                         Customer customerEntity = customerMapper.convertModelToEntity(customer);
                         return customerEntity;
@@ -97,7 +97,7 @@ public class BranchService implements IBranchService {
                     }).collect(Collectors.toSet());
                     branch1.get().setUsers(users);
                 }
-
+        */
                 branch = branchMapper.convertEntityToModel(branchRepository.save(branch1.get()));
 
             }
