@@ -73,25 +73,23 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
     }
 
-    @PatchMapping(path = "{user-id}/change-user-status")
-    public ResponseEntity<?> changeUserStatus(@PathVariable("user-id") Long userId,UserModel userModel){
-            if(userService.checkUserExist(userId)){
-                if(Objects.nonNull(userModel.getRowStatusModel())){
-                    int result = userService.changeUserStatus(userId,userModel.getRowStatusModel().getId());
-                if(result!=0){
+    @PatchMapping(path = "{user-id}/change-user-status/{row-status-id}")
+    public ResponseEntity<?> changeUserStatus(@PathVariable("user-id") Long userId,
+                                              @PathVariable("row-status-id") Integer rowStatusId,
+                                              UserModel userModel){
+            if(userService.checkUserExist(userId)) {
+
+                int result = userService.changeUserStatus(userId, rowStatusId);
+                if (result != 0) {
                     return new ResponseEntity<>(HttpStatus.OK);
-                }
-                else {
+                } else {
                     return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
                 }
-                }
-                else
-                    return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
             }
-            else
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
+                else
+                    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
+    }
 
     @GetMapping(path = "/roles/{role-id}")
     public ResponseEntity<?> getAllUsersByRoleId(@PathVariable("role-id") Long roleId){

@@ -60,20 +60,20 @@ public class AddressController {
         }
     }
 
+//
+//    @DeleteMapping(path="/{address-id}")
+//    public ResponseEntity<?> deleteAddressById(@PathVariable("address-id") Long addressId) throws Exception {
+//        HttpStatus status;
+//        if (addressService.checkIfAddressExists(addressId)) {
+//            Boolean value = addressService.deleteAddressById(addressId);
+//            status = value == true ? HttpStatus.OK : HttpStatus.NOT_ACCEPTABLE;
+//            return new ResponseEntity<>(value, status);
+//        } else {
+//            //throw new AddressNotFoundException("User id '" + userId + "' does not exist");
+//            return null;
+//        }
 
-    @DeleteMapping(path="/{address-id}")
-    public ResponseEntity<?> deleteAddressById(@PathVariable("address-id") Long addressId) throws Exception {
-        HttpStatus status;
-        if (addressService.checkIfAddressExists(addressId)) {
-            Boolean value = addressService.deleteAddressById(addressId);
-            status = value == true ? HttpStatus.OK : HttpStatus.NOT_ACCEPTABLE;
-            return new ResponseEntity<>(value, status);
-        } else {
-            //throw new AddressNotFoundException("User id '" + userId + "' does not exist");
-            return null;
-        }
-
-    }
+ //   }
 
 }
 

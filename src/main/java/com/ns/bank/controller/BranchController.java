@@ -77,20 +77,20 @@ public class BranchController {
         }
     }
 
-
-    @DeleteMapping(path="/{branch-code}")
-    public ResponseEntity<?> deleteBranchByCode(@PathVariable("branch-code") Long branchCode) throws Exception {
-        HttpStatus status;
-        if (branchService.checkIfBranchExists(branchCode)) {
-            Boolean value = branchService.deleteBranchByBranchCode(branchCode);
-            status = value == true ? HttpStatus.NO_CONTENT : HttpStatus.NOT_ACCEPTABLE;
-            return new ResponseEntity<>(value, status);
-        } else {
-            //throw new AddressNotFoundException("User id '" + userId + "' does not exist");
-            return null;
-        }
-
-    }
+//
+//    @DeleteMapping(path="/{branch-code}")
+//    public ResponseEntity<?> deleteBranchByCode(@PathVariable("branch-code") Long branchCode) throws Exception {
+//        HttpStatus status;
+//        if (branchService.checkIfBranchExists(branchCode)) {
+//            Boolean value = branchService.deleteBranchByBranchCode(branchCode);
+//            status = value == true ? HttpStatus.NO_CONTENT : HttpStatus.NOT_ACCEPTABLE;
+//            return new ResponseEntity<>(value, status);
+//        } else {
+//            //throw new AddressNotFoundException("User id '" + userId + "' does not exist");
+//            return null;
+//        }
+//
+//    }
 
 
 }
