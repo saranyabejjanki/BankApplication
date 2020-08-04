@@ -1,6 +1,8 @@
 package com.ns.bank.service.impl;
 
 import com.ns.bank.entity.User;
+import com.ns.bank.mapper.RoleMapper;
+import com.ns.bank.mapper.RowStatusMapper;
 import com.ns.bank.mapper.UserMapper;
 import com.ns.bank.model.UserModel;
 import com.ns.bank.repository.UserRepository;
@@ -22,6 +24,12 @@ public class UserService implements IUserService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private RoleMapper roleMapper;
+
+    @Autowired
+    private RowStatusMapper rowStatusMapper;
 
     @Override
     public UserModel createUser(UserModel userModel) {
@@ -96,6 +104,28 @@ public class UserService implements IUserService {
             }
         }
         return userModels;
+    }
+
+    @Override
+    public UserModel findUserByEmailAndPassword(String email, String password) {
+        Optional<User> userEntity = userRepository.findByEmailAndPassword(email,password);
+        UserModel userModel = null;
+        if(userEntity.isPresent()){
+            User user = userEntity.get();
+
+             userModel = new UserModel(
+                    user.getId(),
+                    user.getName(),
+                    user.getPhone(),
+                    user.getEmail(),
+                    user.getGender(),
+                   roleMapper.convertEntityToModel(user.getRole()),
+                    rowStatusMapper.convertEntityToModel(user.getRowStatus())
+            );
+             return  userModel;
+        }
+        else
+           return userModel;
     }
 
     @Override

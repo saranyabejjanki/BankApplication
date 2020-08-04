@@ -19,6 +19,16 @@ public class UserModel implements Serializable {
     public UserModel() {
     }
 
+    public UserModel(Long id, String name, Long phone, String email, String gender, RoleModel roleModel, RowStatusModel rowStatusModel) {
+        this.id = id;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.gender = gender;
+        this.roleModel = roleModel;
+        this.rowStatusModel = rowStatusModel;
+    }
+
     public UserModel(Long id, String name, Date createdDate, Long phone, String email, String password, String gender,
                      AddressModel addressModel,
                      BranchModel branchModel, RoleModel roleModel, RowStatusModel rowStatusModel) {

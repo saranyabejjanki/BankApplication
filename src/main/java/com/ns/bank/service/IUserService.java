@@ -3,6 +3,7 @@ import com.ns.bank.entity.User;
 import com.ns.bank.model.UserModel;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IUserService {
 
@@ -16,4 +17,5 @@ public interface IUserService {
     List<UserModel> getAllUsersByRoleId(Long roleId);
     List<UserModel> getAllUsersByBranchId(Long branchId);
     List<UserModel> getAllUsersByRowStatusId(Long rowStatusId);
+    UserModel findUserByEmailAndPassword(String email, String password);
 }

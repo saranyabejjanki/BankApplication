@@ -1,18 +1,13 @@
 package com.ns.bank.controller;
-
-import com.ns.bank.entity.User;
+import com.ns.bank.model.LoginModel;
 import com.ns.bank.model.UserModel;
 import com.ns.bank.service.impl.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @RestController
 @RequestMapping(path = "/api/users")
@@ -29,6 +24,12 @@ public class UserController {
         }
         else
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping(path = "login")
+    public ResponseEntity<?> loginUser(@RequestBody LoginModel loginModel){
+       UserModel userModel = userService.findUserByEmailAndPassword(loginModel.getEmail(),loginModel.getPassword());
+        return  new ResponseEntity<>(userModel, Objects.nonNull(userModel) ? HttpStatus.OK:HttpStatus.NOT_FOUND);
     }
 
     @PostMapping(consumes = "application/json")

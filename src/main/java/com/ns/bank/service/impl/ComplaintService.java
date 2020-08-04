@@ -1,21 +1,15 @@
 package com.ns.bank.service.impl;
 
-import com.ns.bank.entity.Address;
-import com.ns.bank.entity.Branch;
 import com.ns.bank.entity.Complaint;
 import com.ns.bank.mapper.ComplaintMapper;
-import com.ns.bank.model.AddressModel;
-import com.ns.bank.model.BranchModel;
 import com.ns.bank.model.ComplaintModel;
 import com.ns.bank.repository.ComplaintRepository;
 import com.ns.bank.service.IComplaintService;
-import com.sun.tools.doclint.Entity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 import static java.util.Objects.nonNull;

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
@@ -23,4 +24,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query(nativeQuery = true,value = "SELECT * FROM bankapplication.user WHERE branch_id = ?1")
     List<User> findAllByBranchId(Long branchId);
+
+    Optional<User> findByEmailAndPassword(String email, String password);
+
 }
