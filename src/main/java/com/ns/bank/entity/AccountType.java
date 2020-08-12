@@ -91,7 +91,7 @@ public class AccountType  implements Serializable {
     }
 
 
-    @ManyToOne(cascade=CascadeType.MERGE,fetch = FetchType.LAZY)
+    @ManyToOne(cascade=CascadeType.MERGE)
     @JoinColumn(name = "eligibilityId")
     public Eligibility getEligibilityId() {
         return eligibilityId;

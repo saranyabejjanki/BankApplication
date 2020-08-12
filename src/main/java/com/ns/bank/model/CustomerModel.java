@@ -163,4 +163,21 @@ public class CustomerModel implements Serializable {
     public void setLoanModels(Set<LoanModel> loanModels) {
         this.loanModels = loanModels;
     }*/
+
+    @Override
+    public String toString() {
+        return "CustomerModel{" +
+                "name='" + name + '\'' +
+                ", dob=" + dob +
+                ", addressModel=" + addressModel +
+                ", email='" + email + '\'' +
+                ", accountNo=" + accountNo +
+                ", password='" + password + '\'' +
+                ", confirmPassword='" + confirmPassword + '\'' +
+                ", branchModel=" + branchModel +
+                ", statusModel=" + statusModel +
+                ", accountCreatedDate=" + accountCreatedDate +
+                ", accountTypeModel=" + accountTypeModel +
+                '}';
+    }
 }

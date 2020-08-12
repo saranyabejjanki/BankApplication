@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
@@ -16,4 +17,6 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
     List<Customer> getAllCustomersByBranchId(Long branchId );
     @Query(nativeQuery = true,value ="SELECT * FROM bankapplication.customer WHERE account_type_id = ?1" )
     List<Customer> getAllCustomersByAccountTypeId(Long accountTypeId);
+    Optional<Customer> findByEmail(String email);
+    Optional<Customer>findByEmailAndPassword(String email,String password);
 }

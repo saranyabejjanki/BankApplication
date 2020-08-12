@@ -98,7 +98,7 @@ public class Customer  implements Serializable {
     }
 
 
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "addressId")
     public Address getAddress() {
         return address;
@@ -128,7 +128,7 @@ public class Customer  implements Serializable {
     }
 
    // @JsonManagedReference
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "branchId")
     public Branch getBranchName() {
         return branchName;
@@ -138,7 +138,7 @@ public class Customer  implements Serializable {
         this.branchName = branchName;
     }
 
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "statusId")
     public Status getStatus() {
         return status;
@@ -159,7 +159,7 @@ public class Customer  implements Serializable {
         this.accountCreatedDate = accountCreatedDate;
     }
 
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "accountTypeId")
     public AccountType getAccountType() {
         return accountType;

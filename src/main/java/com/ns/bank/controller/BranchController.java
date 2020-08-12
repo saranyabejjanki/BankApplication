@@ -1,39 +1,43 @@
 package com.ns.bank.controller;
-
-import com.ns.bank.entity.Branch;
-import com.ns.bank.entity.User;
-import com.ns.bank.model.AddressModel;
 import com.ns.bank.model.BranchModel;
 import com.ns.bank.model.CustomerModel;
-import com.ns.bank.model.UserModel;
+import com.ns.bank.model.MyUserDetails;
 import com.ns.bank.service.IBranchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-
 import static java.util.Objects.nonNull;
 
 @RestController
 @RequestMapping("/api/branches")
 public class BranchController {
+
     @Autowired
     private IBranchService branchService;
-
-    @RequestMapping(method= RequestMethod.GET)
+    //MyUserDetails user =(MyUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+   /* Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    MyUserDetails jwtUser = (MyUserDetails) auth.getPrincipal();*/
+    @RequestMapping(method = RequestMethod.GET)
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<List<BranchModel>> fetchAllBranches() {
         List<BranchModel> branchesList = branchService.fetchAllBranches();
-            return new ResponseEntity<List<BranchModel>>(branchesList, branchesList.size()!=0 ? HttpStatus.OK: HttpStatus.NO_CONTENT);
+        return new ResponseEntity<List<BranchModel>>(branchesList, branchesList.size() != 0 ? HttpStatus.OK : HttpStatus.NO_CONTENT);
     }
 
+
     @GetMapping(path = "/{branch-code}")
+    @PreAuthorize("(hasAuthority('MANAGER') and #branchCode == principal.branchCode)or hasAuthority('ADMIN')" )
     public ResponseEntity<BranchModel> fetchBranchByCode(@PathVariable("branch-code") Long branchCode) throws Exception {
+       // System.out.println("Inside Branch Code::"+jwtUser.getBranchCode());
         if (branchService.checkIfBranchExists(branchCode)) {
             BranchModel branchModel = branchService.fetchBranchByCode(branchCode);
             return new ResponseEntity<BranchModel>(branchModel, HttpStatus.OK);
@@ -45,6 +49,7 @@ public class BranchController {
 
 
     @GetMapping(path = "/{branch-code}/customers")
+    @PreAuthorize("(hasAuthority('MANAGER') and #branchCode == principal.branchCode) or hasAuthority('ADMIN')" )
     public ResponseEntity<List<CustomerModel>> fetchAllCustomersByCode(@PathVariable("branch-code") Long branchCode) throws Exception {
         List<CustomerModel>  customers=new ArrayList<>();
         if (branchService.checkIfBranchExists(branchCode)) {
@@ -54,7 +59,8 @@ public class BranchController {
     }
 
 
-    @PostMapping(consumes ={"application/json"})
+    @PostMapping(path = "/create",consumes ={"application/json"})
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> createBranch(@RequestBody BranchModel branchModel) throws Exception {
         HttpStatus status;
         BranchModel branch = branchService.saveBranch(branchModel);
@@ -64,7 +70,8 @@ public class BranchController {
     }
 
     @PutMapping(path="/{branch-code}")
-    public ResponseEntity<?> updateUser(@PathVariable("branch-code") Long branchCode,@RequestBody BranchModel branchModel) throws Exception{
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<?> updateBranch(@PathVariable("branch-code") Long branchCode,@RequestBody BranchModel branchModel) throws Exception{
         HttpStatus status;
         if(branchService.checkIfBranchExists(branchCode)){
            BranchModel branch= branchService.updateBranch(branchModel);
@@ -73,7 +80,7 @@ public class BranchController {
         }
         else{
             //  throw new UserNotFoundException("User id '" + userId + "' does not exist");
-            return null;
+            return  new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
 
@@ -91,6 +98,5 @@ public class BranchController {
 //        }
 //
 //    }
-
 
 }

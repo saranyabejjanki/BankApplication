@@ -1,8 +1,13 @@
 package com.ns.bank.model;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
-public class UserModel implements Serializable {
+public class UserModel  implements Serializable{
 
     private Long id;
     private String name;
@@ -19,12 +24,13 @@ public class UserModel implements Serializable {
     public UserModel() {
     }
 
-    public UserModel(Long id, String name, Long phone, String email, String gender, RoleModel roleModel, RowStatusModel rowStatusModel) {
+    public UserModel(Long id, String name, String password,Long phone, String email, String gender, RoleModel roleModel, RowStatusModel rowStatusModel) {
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.gender = gender;
+        this.password=password;
         this.roleModel = roleModel;
         this.rowStatusModel = rowStatusModel;
     }
@@ -88,7 +94,6 @@ public class UserModel implements Serializable {
     public String getPassword() {
         return password;
     }
-
     public void setPassword(String password) {
         this.password = password;
     }
@@ -131,5 +136,22 @@ public class UserModel implements Serializable {
 
     public void setRowStatusModel(RowStatusModel rowStatusModel) {
         this.rowStatusModel = rowStatusModel;
+    }
+
+    @Override
+    public String toString() {
+        return "UserModel{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", phone=" + phone +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", gender='" + gender + '\'' +
+                ", createdDate=" + createdDate +
+                ", addressModel=" + addressModel +
+                ", branchModel=" + branchModel +
+                ", roleModel=" + roleModel +
+                ", rowStatusModel=" + rowStatusModel +
+                '}';
     }
 }

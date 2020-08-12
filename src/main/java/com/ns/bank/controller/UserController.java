@@ -1,13 +1,22 @@
 package com.ns.bank.controller;
-import com.ns.bank.model.LoginModel;
-import com.ns.bank.model.UserModel;
+import com.ns.bank.model.*;
+import com.ns.bank.service.impl.CustomerService;
 import com.ns.bank.service.impl.UserService;
+import com.ns.bank.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.userdetails.UserDetails;
 import java.util.*;
+import static java.util.Objects.nonNull;
 
 @RestController
 @RequestMapping(path = "/api/users")
@@ -16,26 +25,82 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private JwtUtil jwtUtil;
+
+    @Autowired
+    private CustomerService customerService;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
     @GetMapping(produces = "application/json")
     public ResponseEntity<?> getAllUsers(){
         List<UserModel> returnData = userService.getAllUsers();
-        if(Objects.nonNull(returnData)){
+        if(nonNull(returnData)){
             return new ResponseEntity<>(returnData,HttpStatus.OK);
         }
         else
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PostMapping(path = "login")
-    public ResponseEntity<?> loginUser(@RequestBody LoginModel loginModel){
-       UserModel userModel = userService.findUserByEmailAndPassword(loginModel.getEmail(),loginModel.getPassword());
-        return  new ResponseEntity<>(userModel, Objects.nonNull(userModel) ? HttpStatus.OK:HttpStatus.NOT_FOUND);
+    @RequestMapping(value={"/login"},method= RequestMethod.POST)
+    public ResponseEntity<?> loginUser(@RequestBody LoginModel loginModel) throws Exception {
+        Authentication authentication = null;
+        int length=loginModel.getEmail().length();
+    try {
+        System.out.println("email::" + loginModel.getEmail());
+        System.out.println("password::" + loginModel.getPassword());
+        System.out.println("isCustomer:" + loginModel.getCustomer());
+
+        String email=null;
+        List<SimpleGrantedAuthority> authorities=null;
+      // System.out.println("length:"+loginModel.getEmail().length());
+
+
+       //System.out.println("substring:"+);
+       // .endsWith("cus")
+        if(loginModel.getEmail().endsWith("cus")) {
+            //email=loginModel.getEmail().substring(3);
+
+            if (loginModel.getCustomer()) {
+                authorities = new ArrayList<>();
+                authorities.add(new SimpleGrantedAuthority("Customer"));
+            }
+        }else {
+            authorities = new ArrayList<>();
+        }
+           authentication = authenticationManager.authenticate(
+                        new UsernamePasswordAuthenticationToken(loginModel.getEmail(), loginModel.getPassword(),authorities));
+
+            } catch (BadCredentialsException e) {
+                throw new Exception("bad credentials");
+            }
+
+
+      System.out.println("principal object"+   authentication.getPrincipal());
+        if (loginModel.getCustomer()) {
+          CustomerDetails myUserDetails = (CustomerDetails) authentication.getPrincipal();
+            final UserDetails userDetails = customerService.loadUserByUsername(loginModel.getEmail().substring(0,(length-3)));
+            final String jwt = jwtUtil.generateToken(userDetails, loginModel.getCustomer());
+          return ResponseEntity.ok(new CustomerAuthenticationResponse(jwt,myUserDetails.getAccountNo(),myUserDetails.getCustomerName(),myUserDetails.getUsername(),myUserDetails.getUsername(),myUserDetails.getCustomerModel().getBranchModel().getBranchCode()));
+
+        } else {
+             MyUserDetails myUserDetails = (MyUserDetails) authentication.getPrincipal();
+            final UserDetails userDetails = userService.loadUserByUsername(loginModel.getEmail());
+            final String jwt = jwtUtil.generateToken(userDetails);
+
+          return ResponseEntity.ok(new AuthenticationResponse(jwt, myUserDetails.getId(), myUserDetails.getName(), myUserDetails.getUserModel().getRoleModel().getName(), myUserDetails.getUsername()));
+
+        }
     }
 
+
     @PostMapping(consumes = "application/json")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> createUser(@RequestBody UserModel userModel){
         UserModel returnData = userService.createUser(userModel);
-        if(Objects.nonNull(returnData)){
+        if(nonNull(returnData)){
             return new ResponseEntity<>(returnData, HttpStatus.CREATED);
         }
         else
@@ -44,24 +109,26 @@ public class UserController {
 
     @GetMapping(path = "/{user-id}",produces = "application/json")
     public ResponseEntity<?> getUserById(@PathVariable("user-id") Long userId){
-        if(userService.checkUserExist(userId)){
-            UserModel returnData =  userService.getUserById(userId);
-            if(Objects.nonNull(returnData)){
+        if(userService.checkUserExist(userId)) {
+            UserModel returnData = userService.getUserById(userId);
+            if (nonNull(returnData)) {
                 return new ResponseEntity<>(returnData, HttpStatus.OK);
             }
-            else
+            else {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
         }
-        else
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+           else {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
     }
     @PutMapping(path = "{user-id}")
     public ResponseEntity<?> updateUser(@PathVariable("user-id") Long userId,@RequestBody UserModel userModel){
-        if(Objects.nonNull(userId)){
+        if(nonNull(userId)){
             if(userService.checkUserExist(userId)){
                 userModel.setId(userId);
                 UserModel returnData = userService.updateUser(userModel);
-                if(Objects.nonNull(returnData)){
+                if(nonNull(returnData)){
                     return new ResponseEntity<>(returnData, HttpStatus.OK);
                 }
                 else

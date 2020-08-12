@@ -108,7 +108,7 @@ public class Branch  implements Serializable {
         this.createdDate = createdDate;
     }
 
-    @ManyToOne(cascade=CascadeType.MERGE,fetch = FetchType.LAZY)
+    @ManyToOne(cascade=CascadeType.MERGE)
     @JoinColumn(name = "rowStatusId")
     public RowStatus getRowStatus() {
         return rowStatus;

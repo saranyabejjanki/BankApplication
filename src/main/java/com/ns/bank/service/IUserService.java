@@ -7,7 +7,6 @@ import java.util.Optional;
 
 public interface IUserService {
 
-
     List<UserModel> getAllUsers();
     UserModel getUserById(Long userId);
     Boolean checkUserExist(Long userId);
@@ -18,4 +17,5 @@ public interface IUserService {
     List<UserModel> getAllUsersByBranchId(Long branchId);
     List<UserModel> getAllUsersByRowStatusId(Long rowStatusId);
     UserModel findUserByEmailAndPassword(String email, String password);
+    UserModel findUserByEmail(String email);
 }

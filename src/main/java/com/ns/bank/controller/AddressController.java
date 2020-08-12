@@ -6,6 +6,7 @@ import com.ns.bank.service.IAddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class AddressController {
     private IAddressService addressService;
 
     @RequestMapping(method= RequestMethod.GET)
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MANAGER')")
     public ResponseEntity<List<AddressModel>> fetchAllAddresses() {
         List<AddressModel> addressList = addressService.fetchAllAddresses();
         return new ResponseEntity<List<AddressModel>>(addressList, addressList.size()!=0 ? HttpStatus.OK: HttpStatus.NO_CONTENT);
@@ -28,6 +30,7 @@ public class AddressController {
 
 
     @GetMapping(path = "/{address-id}")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MANAGER')")
     public ResponseEntity<?> fetchAddressById(@PathVariable("address-id") Long addressId) throws Exception {
         if (addressService.checkIfAddressExists(addressId)) {
             AddressModel addressModel = addressService.fetchAddressById(addressId);

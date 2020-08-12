@@ -1,6 +1,7 @@
 package com.ns.bank.repository;
 
 import com.ns.bank.entity.User;
+import com.ns.bank.model.UserModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -26,5 +27,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findAllByBranchId(Long branchId);
 
     Optional<User> findByEmailAndPassword(String email, String password);
+    Optional<User> findByEmail(String email);
 
 }
