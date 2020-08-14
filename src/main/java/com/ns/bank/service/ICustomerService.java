@@ -15,6 +15,8 @@ public interface ICustomerService {
     List<CustomerModel> getCustomersByBranchId(Long branchId);
     List<CustomerModel> getCustomersByAccountTypeId(Long accountTypeId);
     CustomerModel getCustomerByEmailAndPassword(String email, String Password);
+    Double getBalanceById(Long accountNumber);
+    Integer updateBalanceByAccountNumber(Double amount,Long accountNumber);
 
 
 }

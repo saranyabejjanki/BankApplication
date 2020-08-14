@@ -77,7 +77,6 @@ public class BranchService implements IBranchService {
             BranchModel updatedBranch = new BranchModel();
             if (Objects.nonNull(branchModel)) {
                 Optional<Branch> branch1 = branchRepository.findById(branchModel.getBranchCode());
-
                 branch1.get().setName(branchModel.getName());
                 branch1.get().setPhoneNo(branchModel.getPhoneNo());
                 branch1.get().setAddress(addressMapper.convertModelToEntity(branchModel.getAddressModel()));

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Objects;
 
+import static java.util.Objects.nonNull;
+
 @RestController
 @RequestMapping(path = "/api/customers")
 public class CustomerController {
@@ -24,7 +26,7 @@ public class CustomerController {
                 customerModelList.size() > 0 ? HttpStatus.OK : HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping(path = "{account-number}")
+    @GetMapping(path = "/{account-number}")
     public ResponseEntity<?> getCustomerByAccountNumber(@PathVariable("account-number") Long accountNumber) {
         HttpStatus status;
         CustomerModel customerModel = null;
@@ -50,7 +52,7 @@ public class CustomerController {
         return new ResponseEntity<>(customerModel,status);
     }
 
-    @PutMapping(path = "{account-number}")
+    @PutMapping(path = "/{account-number}")
     public ResponseEntity<?> updateCustomer(@PathVariable("account-number") Long accountNumber,
                                             @RequestBody CustomerModel customerModel){
         customerModel.setAccountNo(accountNumber);
@@ -75,5 +77,20 @@ public class CustomerController {
         List<CustomerModel> customerModelList = customerService.getCustomersByStatusId(accountTypeId);
         return new ResponseEntity<>(customerModelList,
                 customerModelList.size() > 0 ? HttpStatus.OK : HttpStatus.NO_CONTENT);
+    }
+    @GetMapping(path="/balance/{account-number}")
+    public ResponseEntity<?> getAccountBalanceByAccountNumber(@PathVariable("account-number")Long accountNumber) {
+        String message=null;
+        if(customerService.checkAccountNumberExists(accountNumber)) {
+            Double balance = customerService.getBalanceById(accountNumber);
+            if (nonNull(balance)) {
+                return new ResponseEntity<>(balance, HttpStatus.OK);
+            }
+            message="Data is Null";
+            return new ResponseEntity<>(message,HttpStatus.NO_CONTENT);
+        } else {
+            message="AccountNumber doesn't exist";
+            return new ResponseEntity<>(message,HttpStatus.NO_CONTENT);
+        }
     }
 }

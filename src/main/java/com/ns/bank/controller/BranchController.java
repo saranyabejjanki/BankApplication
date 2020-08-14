@@ -27,7 +27,7 @@ public class BranchController {
    /* Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     MyUserDetails jwtUser = (MyUserDetails) auth.getPrincipal();*/
     @RequestMapping(method = RequestMethod.GET)
-    @PreAuthorize("hasAuthority('ADMIN')")
+    //@PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<List<BranchModel>> fetchAllBranches() {
         List<BranchModel> branchesList = branchService.fetchAllBranches();
         return new ResponseEntity<List<BranchModel>>(branchesList, branchesList.size() != 0 ? HttpStatus.OK : HttpStatus.NO_CONTENT);
@@ -35,7 +35,7 @@ public class BranchController {
 
 
     @GetMapping(path = "/{branch-code}")
-    @PreAuthorize("(hasAuthority('MANAGER') and #branchCode == principal.branchCode)or hasAuthority('ADMIN')" )
+   // @PreAuthorize("(hasAuthority('MANAGER') and #branchCode == principal.branchCode)or hasAuthority('ADMIN')" )
     public ResponseEntity<BranchModel> fetchBranchByCode(@PathVariable("branch-code") Long branchCode) throws Exception {
        // System.out.println("Inside Branch Code::"+jwtUser.getBranchCode());
         if (branchService.checkIfBranchExists(branchCode)) {
@@ -49,7 +49,7 @@ public class BranchController {
 
 
     @GetMapping(path = "/{branch-code}/customers")
-    @PreAuthorize("(hasAuthority('MANAGER') and #branchCode == principal.branchCode) or hasAuthority('ADMIN')" )
+   // @PreAuthorize("(hasAuthority('MANAGER') and #branchCode == principal.branchCode) or hasAuthority('ADMIN')" )
     public ResponseEntity<List<CustomerModel>> fetchAllCustomersByCode(@PathVariable("branch-code") Long branchCode) throws Exception {
         List<CustomerModel>  customers=new ArrayList<>();
         if (branchService.checkIfBranchExists(branchCode)) {
@@ -60,7 +60,7 @@ public class BranchController {
 
 
     @PostMapping(path = "/create",consumes ={"application/json"})
-    @PreAuthorize("hasAuthority('ADMIN')")
+   // @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> createBranch(@RequestBody BranchModel branchModel) throws Exception {
         HttpStatus status;
         BranchModel branch = branchService.saveBranch(branchModel);
@@ -70,7 +70,7 @@ public class BranchController {
     }
 
     @PutMapping(path="/{branch-code}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+   // @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> updateBranch(@PathVariable("branch-code") Long branchCode,@RequestBody BranchModel branchModel) throws Exception{
         HttpStatus status;
         if(branchService.checkIfBranchExists(branchCode)){

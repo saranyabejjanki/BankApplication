@@ -40,12 +40,14 @@ public class Customer  implements Serializable {
     @JsonProperty("complaints")
     private Set<Complaint> complaints;
 
+    private Double balance;
+
     public Customer() {
     }
 
     public Customer( String name, Date dob, Address address, String email, Long accountNo, String password, Branch branchName, Status status, Date accountCreatedDate,
                     AccountType accountType, Set<Deposit> deposits, Set<Withdraw> withdraws, Set<Transfer> transfers,
-                    Set<Loan> loans,Set<Complaint>complaints){
+                    Set<Loan> loans,Set<Complaint>complaints,Double balance){
 
         this.name = name;
         this.dob = dob;
@@ -63,6 +65,7 @@ public class Customer  implements Serializable {
         this.transfers = transfers;
         this.loans = loans;
         this.complaints=complaints;
+        this.balance=balance;
 
     }
 
@@ -198,7 +201,6 @@ public class Customer  implements Serializable {
         this.transfers = transfers;
     }
 
-
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "customer")
     public Set<Loan> getLoans() {
         return loans;
@@ -208,14 +210,21 @@ public class Customer  implements Serializable {
         this.loans = loans;
     }
 
-
-
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "customer")
     public Set<Complaint> getComplaints() {
         return complaints;
     }
 
     public void setComplaints(Set<Complaint> complaints) {
-        this.complaints = complaints;
+        this.complaints = complaints;}
+
+
+    @Column(name = "balance")
+    public Double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Double balance) {
+        this.balance = balance;
     }
 }

@@ -1,11 +1,11 @@
 package com.ns.bank.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.Date;
 
 public class DepositModel implements Serializable {
-
-
     private Long id;
     private Double depositAmount;
     private StatusModel statusModel;
@@ -62,5 +62,16 @@ public class DepositModel implements Serializable {
 
     public void setCustomerModel(CustomerModel customerModel) {
         this.customerModel = customerModel;
+    }
+
+    @Override
+    public String toString() {
+        return "DepositModel{" +
+                "id=" + id +
+                ", depositAmount=" + depositAmount +
+                ", statusModel=" + statusModel +
+                ", transactionDate=" + transactionDate +
+                ", customerModel=" + customerModel +
+                '}';
     }
 }

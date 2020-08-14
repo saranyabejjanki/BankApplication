@@ -6,17 +6,18 @@ import java.util.Set;
 
 public class CustomerModel implements Serializable {
 
+    private Long accountNo;
     private String name;
     private Date dob;
     private AddressModel addressModel;
     private String email;
-    private Long accountNo;
     private String password;
     private String confirmPassword;
     private BranchModel branchModel;
     private StatusModel statusModel;
     private Date accountCreatedDate;
     private AccountTypeModel accountTypeModel;
+    private Double balance;
    /* private Set<DepositModel> depositModels;
     private Set<WithdrawModel> withdrawModels;
     private Set<TransferModel> transferModels;
@@ -25,7 +26,7 @@ public class CustomerModel implements Serializable {
     public CustomerModel() {
     }
 
-    public CustomerModel( String name, Date dob, AddressModel addressModel, String email, Long accountNo, String password, String confirmPassword, BranchModel branchModel, StatusModel statusModel, Date accountCreatedDate, AccountTypeModel accountTypeModel /* Set<DepositModel> depositModels, Set<WithdrawModel> withdrawModels, Set<TransferModel> transferModels, Set<LoanModel> loanModels*/) {
+    public CustomerModel( String name, Date dob, AddressModel addressModel, String email, Long accountNo, String password, String confirmPassword, BranchModel branchModel, StatusModel statusModel, Date accountCreatedDate, AccountTypeModel accountTypeModel,Double balance /* Set<DepositModel> depositModels, Set<WithdrawModel> withdrawModels, Set<TransferModel> transferModels, Set<LoanModel> loanModels*/) {
 
         this.name = name;
         this.dob = dob;
@@ -38,6 +39,7 @@ public class CustomerModel implements Serializable {
         this.statusModel = statusModel;
         this.accountCreatedDate = accountCreatedDate;
         this.accountTypeModel = accountTypeModel;
+        this.balance=balance;
       /*  this.depositModels = depositModels;
         this.withdrawModels = withdrawModels;
         this.transferModels = transferModels;
@@ -132,7 +134,15 @@ public class CustomerModel implements Serializable {
         this.accountTypeModel = accountTypeModel;
     }
 
-   /* public Set<DepositModel> getDepositModels() {
+    public Double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Double balance) {
+        this.balance = balance;
+    }
+
+/* public Set<DepositModel> getDepositModels() {
         return depositModels;
     }
 

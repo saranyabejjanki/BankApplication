@@ -38,4 +38,11 @@ public class StatusModel implements Serializable {
         this.name = name;
     }
 
+    @Override
+    public String toString() {
+        return "StatusModel{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

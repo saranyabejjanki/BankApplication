@@ -31,6 +31,7 @@ public class CustomerMapper implements ICustomerMapper {
             customer.setPassword(customerModel.getPassword());
             customer.setEmail(customerModel.getEmail());
             customer.setName(customerModel.getName());
+            customer.setBalance(customerModel.getBalance());
 
             if (Objects.nonNull(customerModel.getAddressModel()))
                 customer.setAddress(addressMapper.convertModelToEntity(customerModel.getAddressModel()));
@@ -60,6 +61,7 @@ public class CustomerMapper implements ICustomerMapper {
             customerModel.setPassword(customerEntity.getPassword());
             customerModel.setEmail(customerEntity.getEmail());
             customerModel.setName(customerEntity.getName());
+            customerModel.setBalance(customerEntity.getBalance());
 
             if (Objects.nonNull(customerEntity.getAddress()))
                 customerModel.setAddressModel(addressMapper.convertEntityToModel(customerEntity.getAddress()));

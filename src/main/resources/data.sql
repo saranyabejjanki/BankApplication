@@ -8,7 +8,8 @@ INSERT INTO `bankapplication`.`status` (`id`, `name`) VALUES ('5', 'RESOLVED');
 INSERT INTO `bankapplication`.`status` (`id`, `name`) VALUES ('6', 'SUCCESS');
 INSERT INTO `bankapplication`.`status` (`id`, `name`) VALUES ('7', 'REJECTED');
 INSERT INTO `bankapplication`.`status` (`id`, `name`) VALUES ('8', 'FAILED');
-
+INSERT INTO `bankapplication`.`status` (`id`, `name`) VALUES ('9', 'REFUNDED');
+INSERT INTO `bankapplication`.`status` (`id`, `name`) VALUES ('10', 'RAISED');
 --Rowstatus
 INSERT INTO `bankapplication`.`row_status` (`id`, `name`) VALUES ('1', 'ACTIVE');
 INSERT INTO `bankapplication`.`row_status` (`id`, `name`) VALUES ('2', 'INACTIVE');

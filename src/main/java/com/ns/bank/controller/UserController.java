@@ -49,20 +49,8 @@ public class UserController {
         Authentication authentication = null;
         int length=loginModel.getEmail().length();
     try {
-        System.out.println("email::" + loginModel.getEmail());
-        System.out.println("password::" + loginModel.getPassword());
-        System.out.println("isCustomer:" + loginModel.getCustomer());
-
-        String email=null;
         List<SimpleGrantedAuthority> authorities=null;
-      // System.out.println("length:"+loginModel.getEmail().length());
-
-
-       //System.out.println("substring:"+);
-       // .endsWith("cus")
         if(loginModel.getEmail().endsWith("cus")) {
-            //email=loginModel.getEmail().substring(3);
-
             if (loginModel.getCustomer()) {
                 authorities = new ArrayList<>();
                 authorities.add(new SimpleGrantedAuthority("Customer"));
@@ -72,13 +60,9 @@ public class UserController {
         }
            authentication = authenticationManager.authenticate(
                         new UsernamePasswordAuthenticationToken(loginModel.getEmail(), loginModel.getPassword(),authorities));
-
             } catch (BadCredentialsException e) {
                 throw new Exception("bad credentials");
             }
-
-
-      System.out.println("principal object"+   authentication.getPrincipal());
         if (loginModel.getCustomer()) {
           CustomerDetails myUserDetails = (CustomerDetails) authentication.getPrincipal();
             final UserDetails userDetails = customerService.loadUserByUsername(loginModel.getEmail().substring(0,(length-3)));
@@ -94,7 +78,6 @@ public class UserController {
 
         }
     }
-
 
     @PostMapping(consumes = "application/json")
     @PreAuthorize("hasAuthority('ADMIN')")

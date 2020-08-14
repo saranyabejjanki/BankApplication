@@ -98,10 +98,24 @@ public class CustomerService implements ICustomerService, UserDetailsService {
             CustomerModel customerModel=customerMapper.convertEntityToModel(customer.get());
             return  customerModel;
     }
+    @Override
+    public Double getBalanceById(Long accountNumber) {
+       Double balance= customerRepository.findBalanceByAccountNo(accountNumber);
+       return  balance;
+    }
+
+    @Override
+    public Integer updateBalanceByAccountNumber(Double amount,Long accountNumber) {
+        return  customerRepository.updateAccountBalanceByAccountNumber(amount,accountNumber);
+    }
 
     public CustomerModel findCustomerByEmail(String email) {
         Optional<Customer> customer=customerRepository.findByEmail(email);
-        return customerMapper.convertEntityToModel(customer.get());
+        Customer customer1=new Customer();
+        if(customer.isPresent()){
+            customer1=customer.get();
+        }
+        return customerMapper.convertEntityToModel(customer1);
     }
 
 

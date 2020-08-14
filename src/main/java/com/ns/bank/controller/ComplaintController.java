@@ -25,10 +25,8 @@ public class ComplaintController {
     @RequestMapping(method= RequestMethod.GET)
     public ResponseEntity<List<ComplaintModel>> fetchAllComplaints() {
         List<ComplaintModel> complaintList = complaintService.fetchAllComplaints();
-        return new ResponseEntity<List<ComplaintModel>>(complaintList, complaintList.size()!=0 ? HttpStatus.OK: HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(complaintList, complaintList.size()!=0 ? HttpStatus.OK: HttpStatus.NO_CONTENT);
     }
-
-
 
     @GetMapping(path = "/{complaint-id}")
     public ResponseEntity<?> fetchComplaintById(@PathVariable("complaint-id") Long complaintId) throws Exception {
@@ -50,13 +48,10 @@ public class ComplaintController {
         //}
     }
     @GetMapping(path = "/statuses/{status-id}")
-    public ResponseEntity<?> fetchComplaintByStatusId(/*@PathVariable("complaint-id") Long complaintId*/@PathVariable("status-id") Long statusId) throws Exception {
-        //if (complaintService.checkIfComplaintExists(complaintId)) {
+    public ResponseEntity<?> fetchComplaintByStatusId(@PathVariable("status-id") Long statusId) throws Exception {
+
             List<ComplaintModel> complaintModels = complaintService.fetchComplaintByStatusId(statusId);
             return new ResponseEntity<>(complaintModels, HttpStatus.OK);
-       /* }   else {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }*/
     }
     @RequestMapping(method=RequestMethod.POST)
     public ResponseEntity<?> createComplaint(@RequestBody ComplaintModel complaintModel) throws Exception {
@@ -80,7 +75,6 @@ public class ComplaintController {
             return null;
         }
     }
-
   @PutMapping(path="{complaint-id}/statuses/{status-id}")
     public ResponseEntity<?> updateComplaintByStatusId(@PathVariable("complaint-id") Long complaintId,@PathVariable("status-id") Long statusId,@RequestBody ComplaintModel complaintModel) throws Exception{
         HttpStatus status;
