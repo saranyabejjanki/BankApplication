@@ -15,6 +15,8 @@ import java.util.List;
 
 import static java.util.Objects.nonNull;
 
+
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping(path = "api/deposits")
 public class DepositController {
@@ -30,7 +32,6 @@ public class DepositController {
         return new ResponseEntity<>(depositModelList,
                 depositModelList.size() > 0 ? HttpStatus.OK : HttpStatus.NO_CONTENT);
     }
-
     @GetMapping(path = "/{deposit-id}")
     public ResponseEntity<?> getDepositById(@PathVariable("deposit-id") Long depositId, @PathVariable("account-number") Long accountNumber) {
         String message = null;
@@ -66,7 +67,7 @@ public class DepositController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
-    @RequestMapping(value = "/customer", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> createDeposit(@RequestBody DepositModel depositModel) {
         // System.out.println("id"+depositModel.getStatusModel().getId());
         HttpStatus status = null;
@@ -97,14 +98,12 @@ public class DepositController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
     }
-
     @GetMapping(path = "/status/{status-id}")
     public ResponseEntity<?> getAllDepositsByStatusId(@PathVariable("status-id") Long statusId) {
         List<DepositModel> depositModelList = depositService.getAllDepositByStatusId(statusId);
         return new ResponseEntity<>(depositModelList,
                 depositModelList.size() > 0 ? HttpStatus.OK : HttpStatus.NO_CONTENT);
     }
-
     @GetMapping(path = "{/customer/account-number}")
     public ResponseEntity<?> getAllDepositsByAccountNumber(@PathVariable("account-number") Long accountNumber) {
         List<DepositModel> depositModelList = depositService.getDepositsByAccountNumber(accountNumber);
@@ -112,5 +111,4 @@ public class DepositController {
         return new ResponseEntity<>(depositModelList,
                 depositModelList.size() > 0 ? HttpStatus.OK : HttpStatus.NO_CONTENT);
     }
-
 }

@@ -100,7 +100,6 @@ public class WithdrawController {
                             }
                         }
                         return new ResponseEntity<>(withdrawModel1, status);
-
                     } else {
                         throw new Exception("Insufficient Balance ");
                     }
@@ -108,9 +107,7 @@ public class WithdrawController {
             } else {
                 throw new Exception("Account number" + withdrawModel.getCustomerModel().getAccountNo() + "doesn't exist");
             }
-
         }
-
         return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
     }
 
@@ -120,7 +117,6 @@ public class WithdrawController {
         return new ResponseEntity<>(withdrawModelList,
                 withdrawModelList.size() > 0 ? HttpStatus.OK : HttpStatus.NO_CONTENT);
     }
-
     @GetMapping(path = "{/customer/account-number}")
     public ResponseEntity<?> getAllWithdrawsByAccountNumber(@PathVariable("account-number") Long accountNumber) {
         List<WithdrawModel> withdrawModelList = withdrawService.getWithdrawsByAccountNumber(accountNumber);
@@ -128,5 +124,4 @@ public class WithdrawController {
         return new ResponseEntity<>(withdrawModelList,
                 withdrawModelList.size() > 0 ? HttpStatus.OK : HttpStatus.NO_CONTENT);
     }
-
 }

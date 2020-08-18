@@ -17,7 +17,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetails;
 import java.util.*;
 import static java.util.Objects.nonNull;
-
+@CrossOrigin(origins = "http:localhost:4200")
 @RestController
 @RequestMapping(path = "/api/users")
 public class UserController {
@@ -58,6 +58,7 @@ public class UserController {
         }else {
             authorities = new ArrayList<>();
         }
+        System.out.println("hello");
            authentication = authenticationManager.authenticate(
                         new UsernamePasswordAuthenticationToken(loginModel.getEmail(), loginModel.getPassword(),authorities));
             } catch (BadCredentialsException e) {
