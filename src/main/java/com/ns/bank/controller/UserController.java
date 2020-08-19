@@ -68,7 +68,8 @@ public class UserController {
           CustomerDetails myUserDetails = (CustomerDetails) authentication.getPrincipal();
             final UserDetails userDetails = customerService.loadUserByUsername(loginModel.getEmail().substring(0,(length-3)));
             final String jwt = jwtUtil.generateToken(userDetails, loginModel.getCustomer());
-          return ResponseEntity.ok(new CustomerAuthenticationResponse(jwt,myUserDetails.getAccountNo(),myUserDetails.getCustomerName(),myUserDetails.getUsername(),myUserDetails.getUsername(),myUserDetails.getCustomerModel().getBranchModel().getBranchCode()));
+            myUserDetails.setRole("CUSTOMER");
+          return ResponseEntity.ok(new CustomerAuthenticationResponse(jwt,myUserDetails.getAccountNo(),myUserDetails.getCustomerName(),myUserDetails.getUsername(),myUserDetails.getRole(),myUserDetails.getCustomerModel().getBranchModel().getBranchCode()));
 
         } else {
              MyUserDetails myUserDetails = (MyUserDetails) authentication.getPrincipal();

@@ -40,37 +40,39 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        final String authorizationHeader=request.getHeader("Authorization");
-           String role=request.getHeader("Role");
-         System.out.println("Inside Filter..");
-        String email=null;
-        String jwt=null;
-        UserDetails userDetails=null;
-        if(authorizationHeader!=null&&authorizationHeader.startsWith("Bearer ")){
-            jwt=authorizationHeader.substring(7);
+        final String authorizationHeader = request.getHeader("Authorization");
+        String role = request.getHeader("Role");
+        System.out.println("Inside Filter..");
+        String email = null;
+        String jwt = null;
+        UserDetails userDetails = null;
+        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+            jwt = authorizationHeader.substring(7);
 
-           email=jwtUtil.extractEmail(jwt);}
-        List<SimpleGrantedAuthority>  authorities = new ArrayList<>();
-       if(nonNull(role)){
-           if(role.equals("Customer")) {
-               userDetails = customerService.loadUserByUsername(email);
-           }
+            email = jwtUtil.extractEmail(jwt);
         }
-       else {
-           if(nonNull(email)) {
-               userDetails = userService.loadUserByUsername(email);
-           }
-       }
-        if(email !=null && SecurityContextHolder.getContext().getAuthentication()==null) {
-
-            if(jwtUtil.validateToken(jwt,userDetails)){
-              System.out.println("inside JWTrequestFilter"+jwtUtil.validateToken(jwt,userDetails));
-                UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken=new UsernamePasswordAuthenticationToken(userDetails
-                        ,null,userDetails.getAuthorities());
-                usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        if (nonNull(role)) {
+            System.out.println("inside jwtrequest..");
+            if (role.equals("Customer")) {
+                userDetails = customerService.loadUserByUsername(email);
+            }
+        } else {
+            if (nonNull(email)) {
+                userDetails = userService.loadUserByUsername(email);
             }
         }
-        filterChain.doFilter(request,response);
+        if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            if (nonNull(userDetails)) {
+                if (jwtUtil.validateToken(jwt, userDetails)) {
+                    System.out.println("inside JWTrequestFilter" + jwtUtil.validateToken(jwt, userDetails));
+                    UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails
+                            , null, userDetails.getAuthorities());
+                    usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+                }
+            }
+        }
+        filterChain.doFilter(request, response);
     }
 }

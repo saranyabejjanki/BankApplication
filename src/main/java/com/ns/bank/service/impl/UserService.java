@@ -133,7 +133,11 @@ public class UserService implements IUserService , UserDetailsService {
     @Override
     public UserModel findUserByEmail(String email) {
         Optional<User> user= userRepository.findByEmail(email);
-        return userMapper.convertEntityToModel(user.get());
+        UserModel userModel=new UserModel();
+        if(user.isPresent()) {
+          userModel= userMapper.convertEntityToModel(user.get());
+        }
+        return userModel;
     }
 
     @Override

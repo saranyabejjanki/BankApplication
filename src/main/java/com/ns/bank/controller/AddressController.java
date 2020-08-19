@@ -28,7 +28,6 @@ public class AddressController {
     }
 
 
-
     @GetMapping(path = "/{address-id}")
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('MANAGER')")
     public ResponseEntity<?> fetchAddressById(@PathVariable("address-id") Long addressId) throws Exception {

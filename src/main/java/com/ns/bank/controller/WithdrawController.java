@@ -1,22 +1,17 @@
 package com.ns.bank.controller;
-
-import com.ns.bank.entity.Withdraw;
-import com.ns.bank.model.DepositModel;
 import com.ns.bank.model.RowStatusModel;
 import com.ns.bank.model.StatusModel;
 import com.ns.bank.model.WithdrawModel;
 import com.ns.bank.service.ICustomerService;
 import com.ns.bank.service.IWithdrawService;
-import com.ns.bank.service.impl.WithdrawService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-
 import static java.util.Objects.nonNull;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(path = "/api/withdraws")
 public class WithdrawController {
@@ -66,7 +61,7 @@ public class WithdrawController {
         }
     }
 
-    @RequestMapping(value = "/customer", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> createWithdraw(@RequestBody WithdrawModel withdrawModel) throws Exception {
         HttpStatus status = null;
         StatusModel statusModel = new StatusModel();

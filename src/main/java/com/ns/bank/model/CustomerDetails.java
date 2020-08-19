@@ -13,6 +13,7 @@ public class CustomerDetails implements UserDetails {
     private Long customerBranchCode;
     private String password;
     private String email;
+    private String role;
 
     private Boolean customer;
 
@@ -23,13 +24,22 @@ public class CustomerDetails implements UserDetails {
         this.customerBranchCode = customerBranchCode;
     }
 
-    public CustomerDetails(Long accountNo, String customerName, Long customerBranchCode,String password,String email) {
+    public CustomerDetails(Long accountNo, String customerName, Long customerBranchCode,String password,String email,String role) {
         this.accountNo = accountNo;
         this.customerName = customerName;
         this.customerBranchCode = customerBranchCode;
         this.password=password;
         this.email=email;
         this.customer=customer;
+        this.role=role;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public CustomerDetails(CustomerModel customerModel) {
