@@ -18,5 +18,7 @@ public interface ComplaintRepository extends JpaRepository<Complaint, Long> {
 
     @Query(nativeQuery = true,value="UPDATE  bankapplication.complaint  SET  status_id=?1 WHERE id=?2")
     public Complaint updateStatus(Long statusId,Long complaintId);
+    @Query(nativeQuery = true,value="SELECT COUNT(*) FROM bankapplication.complaint WHERE status_id=?1")
+    public Integer getCompalintCountByStatus(Long statusId);
 
 }

@@ -161,4 +161,10 @@ public class UserController {
         List<UserModel> userModels = userService.getAllUsersByRowStatusId(rowStatusId);
         return  new  ResponseEntity<>(userModels,userModels.size()>0 ? HttpStatus.OK : HttpStatus.NO_CONTENT);
     }
+    @GetMapping(path = "count/{branch-id}")
+    public  ResponseEntity<?> getUsersCountByBranchId(@PathVariable("branch-id") Long branchId){
+                Integer count=userService.getCountOfUsersByBranchCode(branchId);
+         return  new ResponseEntity<>("User(s) Count---"+count,HttpStatus.OK);
+    }
+
 }

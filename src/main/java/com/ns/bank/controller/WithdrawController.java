@@ -82,13 +82,13 @@ public class WithdrawController {
                         } else {
                             int value = withdrawService.updateWithdrawStatus(8L, withdrawModel1.getId());
                             status = value > 0 ? HttpStatus.OK : HttpStatus.NOT_MODIFIED;
-                            Double userBalance = customerService.getBalanceById(withdrawModel.getCustomerModel().getAccountNo());
+                           // Double userBalance = customerService.getBalanceById(withdrawModel.getCustomerModel().getAccountNo());
                            // userBalance = userBalance + withdrawModel1.getWithdrawAmount();
                             int result1 = customerService.updateBalanceByAccountNumber(withdrawModel1.getWithdrawAmount(), withdrawModel.getCustomerModel().getAccountNo());
                             if (result1 > 0) {
                                 int value1 = withdrawService.updateWithdrawStatus(9L, withdrawModel1.getId());
-                                status = value1 > 0 ? HttpStatus.OK : HttpStatus.NOT_MODIFIED;
-                                return new ResponseEntity<>(withdrawModel1, status);
+                                status = value1 > 0 ? HttpStatus.OK: HttpStatus.NOT_MODIFIED;
+                                return new ResponseEntity<>("Deducted Amount will be Refunded", status);
                             } else {
                                 int value2 = withdrawService.updateWithdrawStatus(2L, withdrawModel1.getId());
                                 status = value2 > 0 ? HttpStatus.OK : HttpStatus.NOT_MODIFIED;
@@ -96,7 +96,8 @@ public class WithdrawController {
                         }
                         return new ResponseEntity<>(withdrawModel1, status);
                     } else {
-                        throw new Exception("Insufficient Balance ");
+                        int value = withdrawService.updateWithdrawStatus(8L, withdrawModel1.getId());
+                        return new ResponseEntity<>("Insufficient Balance",HttpStatus.INTERNAL_SERVER_ERROR);
                     }
                 }
             } else {

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Objects;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/complaints")
 public class ComplaintController {
@@ -38,6 +39,13 @@ public class ComplaintController {
         }
     }
 
+
+    @GetMapping(path="/count/{status-id}")
+    public ResponseEntity<?> getComplaintCountByStatusId(@PathVariable("status-id") Long statusId){
+         Integer count=complaintService.getComplaintCountByStatusId(statusId);
+        return new ResponseEntity<>("Complaint(s) Count---"+count,HttpStatus.OK);
+    }
+
     @GetMapping(path = "/customers/{account-number}")
     public ResponseEntity<?> fetchComplaintByAccountNumber(/*@PathVariable("complaint-id") Long complaintId*/@PathVariable("account-number") Long accountNumber) throws Exception {
        // if (complaintService.checkIfComplaintExists(complaintId)) {
@@ -47,6 +55,10 @@ public class ComplaintController {
            // return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         //}
     }
+
+
+
+
     @GetMapping(path = "/statuses/{status-id}")
     public ResponseEntity<?> fetchComplaintByStatusId(@PathVariable("status-id") Long statusId) throws Exception {
 
@@ -100,7 +112,5 @@ public class ComplaintController {
             //throw new AddressNotFoundException("User id '" + userId + "' does not exist");
             return null;
         }
-
     }
-
 }

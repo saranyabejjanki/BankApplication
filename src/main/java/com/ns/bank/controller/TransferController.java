@@ -12,6 +12,7 @@ import java.util.List;
 
 import static java.util.Objects.nonNull;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(path = "/api/transfers")
 public class TransferController {

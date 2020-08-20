@@ -106,4 +106,9 @@ public class ComplaintService implements IComplaintService {
             complaintModel=complaintMapper.convertEntityToModel(complaint);
         return  complaintModel;
     }
+
+    @Override
+    public Integer getComplaintCountByStatusId(Long statusId) {
+        return  complaintRepository.getCompalintCountByStatus(statusId);
+    }
 }

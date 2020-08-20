@@ -141,6 +141,11 @@ public class UserService implements IUserService , UserDetailsService {
     }
 
     @Override
+    public Integer getCountOfUsersByBranchCode(Long brachCode) {
+        return userRepository.getCountOfUsersByBranch(brachCode);
+    }
+
+    @Override
     public List<UserModel> getAllUsers() {
         List<User> users = userRepository.findAll();
         List<UserModel> userModels = new ArrayList<>();

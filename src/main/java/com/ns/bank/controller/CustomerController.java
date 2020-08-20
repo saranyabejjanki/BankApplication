@@ -12,6 +12,7 @@ import java.util.Objects;
 
 import static java.util.Objects.nonNull;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(path = "/api/customers")
 public class CustomerController {

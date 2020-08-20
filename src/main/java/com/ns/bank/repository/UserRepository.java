@@ -29,4 +29,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmailAndPassword(String email, String password);
     Optional<User> findByEmail(String email);
 
+    @Query(nativeQuery = true,value="SELECT COUNT(*) FROM bankapplication.user WHERE branch_id=?1")
+    Integer getCountOfUsersByBranch(Long branchCode);
+
 }
