@@ -17,14 +17,14 @@ public class LoanType  implements Serializable {
     private Double interest;
     private Integer months;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne()
     @JoinColumn(name = "eligibilityId")
     private Eligibility eligibility;
 
     private Double minAmount;
     private Double maxAmount;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne()
     @JoinColumn(name = "rowStatusId")
     private RowStatus rowStatus;
 
@@ -32,7 +32,7 @@ public class LoanType  implements Serializable {
     //@JsonBackReference
     private Set<Loan> loans;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne()
     @JoinColumn(name = "accountTypeId")
     private AccountType accountType;
 

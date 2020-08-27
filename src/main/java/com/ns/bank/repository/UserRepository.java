@@ -32,4 +32,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query(nativeQuery = true,value="SELECT COUNT(*) FROM bankapplication.user WHERE branch_id=?1")
     Integer getCountOfUsersByBranch(Long branchCode);
 
+    @Query(nativeQuery = true,value="SELECT COUNT(*) FROM bankapplication.user")
+    Integer getAllUsersCount();
 }

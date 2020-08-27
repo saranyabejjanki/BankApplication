@@ -28,4 +28,12 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
     @Modifying
     @Query(nativeQuery = true,value ="UPDATE bankapplication.customer SET balance=balance+?1 WHERE account_no =?2")
     Integer updateAccountBalanceByAccountNumber(Double amount,Long accountNumber);
+
+    @Query(nativeQuery = true,value =" SELECT COUNT(*) FROM bankapplication.customer WHERE branch_id =?1")
+    Integer getAllCustomersCountByBranchId(Long branchCode);
+    @Query(nativeQuery = true,value ="SELECT COUNT(*) FROM bankapplication.customer")
+    Integer getAllCustomersCount();
+
+    @Query(nativeQuery = true,value = "SELECT SUM(balance) From bankapplication.customer")
+    Integer getBankBalance();
 }

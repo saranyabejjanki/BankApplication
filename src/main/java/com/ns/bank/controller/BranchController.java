@@ -48,6 +48,16 @@ public class BranchController {
         }
     }
 
+    @GetMapping(path = "count")
+    public ResponseEntity<?> getBranchesCount(){
+        Integer count = branchService.getAllBranchesCount();
+        return new ResponseEntity(count, HttpStatus.OK);
+    }
+    @GetMapping(path="branch-balance")
+    public ResponseEntity<?> getBalanceByBranchWise(){
+        List<Object> data = branchService.getAllBranchesBalance();
+        return new ResponseEntity<>(data,HttpStatus.OK);
+    }
 
     @GetMapping(path = "/{branch-code}/customers")
    // @PreAuthorize("(hasAuthority('MANAGER') and #branchCode == principal.branchCode) or hasAuthority('ADMIN')" )

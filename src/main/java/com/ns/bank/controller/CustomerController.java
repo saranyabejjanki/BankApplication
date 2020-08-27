@@ -94,4 +94,21 @@ public class CustomerController {
             return new ResponseEntity<>(message,HttpStatus.NO_CONTENT);
         }
     }
+
+    @GetMapping(path = "balance")
+    public Integer getBankBalance(){
+        return customerService.getBankBalance();
+    }
+
+
+    @GetMapping(path = "count")
+    public ResponseEntity<?> getAllCustomersCount(){
+        Integer count = customerService.getAllCustomersCount();
+        return new ResponseEntity<>(count,HttpStatus.OK);
+    }
+    @GetMapping(path = "count/{branch-code}")
+    public ResponseEntity<?> getAllCustomersCountByBranchCode(@PathVariable("branch-code") Long branchCode){
+        Integer count = customerService.getAllCustomersCountByBranch(branchCode);
+        return new ResponseEntity<>(count,HttpStatus.OK);
+    }
 }

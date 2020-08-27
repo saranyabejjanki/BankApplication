@@ -18,26 +18,46 @@ import java.util.Set;
 @Table(name="customer")
 public class Customer  implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "accountNumberGenerator")
     private Long accountNo;
+    @Column(name = "name")
     private String name;
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dob;
+    @ManyToOne()
+    @JoinColumn(name = "addressId")
     private Address address;
     private String email;
     private String password;
+    @ManyToOne()
+    @JoinColumn(name = "branchId")
     private Branch branchName;
+    @ManyToOne()
+    @JoinColumn(name = "statusId")
     private Status status;
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     private Date accountCreatedDate;
+    @ManyToOne()
+    @JoinColumn(name = "accountTypeId")
     private AccountType accountType;
 
     @JsonProperty("deposits")
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "customer")
     private Set<Deposit> deposits;
     @JsonProperty("withdraws")
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "customer")
     private Set<Withdraw> withdraws;
     @JsonProperty("transfers")
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "customer")
     private Set<Transfer> transfers;
     @JsonProperty("loans")
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "customer")
     private Set<Loan> loans;
     @JsonProperty("complaints")
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "customer")
     private Set<Complaint> complaints;
 
     private Double balance;
@@ -69,8 +89,6 @@ public class Customer  implements Serializable {
 
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "accountNumberGenerator")
 
     public Long getAccountNo() {
         return accountNo;
@@ -80,7 +98,7 @@ public class Customer  implements Serializable {
         this.accountNo = accountNo;
     }
 
-    @Column(name = "name")
+
     public String getName() {
         return name;
     }
@@ -89,8 +107,7 @@ public class Customer  implements Serializable {
         this.name = name;
     }
 
-    @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
+
     public Date getDob() {
         return dob;
     }
@@ -101,8 +118,6 @@ public class Customer  implements Serializable {
     }
 
 
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "addressId")
     public Address getAddress() {
         return address;
     }
@@ -131,8 +146,7 @@ public class Customer  implements Serializable {
     }
 
    // @JsonManagedReference
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "branchId")
+
     public Branch getBranchName() {
         return branchName;
     }
@@ -141,8 +155,7 @@ public class Customer  implements Serializable {
         this.branchName = branchName;
     }
 
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "statusId")
+
     public Status getStatus() {
         return status;
     }
@@ -151,8 +164,7 @@ public class Customer  implements Serializable {
         this.status = status;
     }
 
-    @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
+
     public Date getAccountCreatedDate() {
         return accountCreatedDate;
     }
@@ -162,8 +174,7 @@ public class Customer  implements Serializable {
         this.accountCreatedDate = accountCreatedDate;
     }
 
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "accountTypeId")
+
     public AccountType getAccountType() {
         return accountType;
     }
@@ -172,9 +183,6 @@ public class Customer  implements Serializable {
         this.accountType = accountType;
     }
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "customer")
-
-
     public Set<Deposit> getDeposits() {
         return deposits;
     }
@@ -182,7 +190,7 @@ public class Customer  implements Serializable {
     public void setDeposits(Set<Deposit> deposits) {
         this.deposits = deposits;
     }
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "customer")
+
 
     public Set<Withdraw> getWithdraws() {
         return withdraws;
@@ -191,7 +199,7 @@ public class Customer  implements Serializable {
     public void setWithdraws(Set<Withdraw> withdraws) {
         this.withdraws = withdraws;
     }
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "customer")
+
 
     public Set<Transfer> getTransfers() {
         return transfers;
@@ -201,7 +209,7 @@ public class Customer  implements Serializable {
         this.transfers = transfers;
     }
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "customer")
+
     public Set<Loan> getLoans() {
         return loans;
     }
@@ -210,14 +218,13 @@ public class Customer  implements Serializable {
         this.loans = loans;
     }
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "customer")
+
     public Set<Complaint> getComplaints() {
         return complaints;
     }
 
     public void setComplaints(Set<Complaint> complaints) {
         this.complaints = complaints;}
-
 
     @Column(name = "balance")
     public Double getBalance() {

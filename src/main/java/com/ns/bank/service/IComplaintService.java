@@ -17,5 +17,5 @@ public interface IComplaintService {
     List<ComplaintModel> fetchComplaintByAccountNumber(Long account_no);
     ComplaintModel updateStatus(Long statusId,Long complaintId);
     Integer getComplaintCountByStatusId(Long statusId);
-
+    Integer getComplaintCount();
 }

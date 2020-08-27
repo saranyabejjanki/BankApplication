@@ -109,6 +109,21 @@ public class CustomerService implements ICustomerService, UserDetailsService {
         return  customerRepository.updateAccountBalanceByAccountNumber(amount,accountNumber);
     }
 
+    @Override
+    public Integer getAllCustomersCount() {
+        return customerRepository.getAllCustomersCount();
+    }
+
+    @Override
+    public Integer getAllCustomersCountByBranch(Long branchCode) {
+        return customerRepository.getAllCustomersCountByBranchId(branchCode);
+    }
+
+    @Override
+    public Integer getBankBalance() {
+        return customerRepository.getBankBalance();
+    }
+
     public CustomerModel findCustomerByEmail(String email) {
         Optional<Customer> customer=customerRepository.findByEmail(email);
         Customer customer1=new Customer();
@@ -127,7 +142,6 @@ public class CustomerService implements ICustomerService, UserDetailsService {
         System.out.println("inside customer...service inside load user");
         System.out.println("customerModel"+customerModel.toString());
         if (username.equals(customerModel.getEmail())) {
-
             //return new User(customerModel.getEmail(),customerModel.getPassword(),new ArrayList<>());
            //return new CustomerDetails(customerModel.getAccountNo(),customerModel.getName(),customerModel.getBranchModel().getBranchCode(),customerModel.getPassword(),customerModel.getEmail());
             return new CustomerDetails(customerModel);

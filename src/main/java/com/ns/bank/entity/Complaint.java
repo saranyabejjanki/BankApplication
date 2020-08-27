@@ -11,11 +11,21 @@ import java.util.Date;
 @Table(name="complaint")
 public class Complaint  implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private   Long id;
     private String description;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "statusId")
     private Status status;
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     private Date raisedDate;
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     private Date updatedDate;
+    @ManyToOne( fetch = FetchType.LAZY)
+    @JoinColumn(name = "accountNo")
     private Customer customer;
 
     public Complaint() {
@@ -30,8 +40,7 @@ public class Complaint  implements Serializable {
         this.customer=customer;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     public  Long getId() {
         return id;
     }
@@ -48,8 +57,7 @@ public class Complaint  implements Serializable {
         this.description = description;
     }
 
-    @ManyToOne(cascade=CascadeType.MERGE,fetch = FetchType.LAZY)
-    @JoinColumn(name = "statusId")
+
     public Status getStatus() {
         return status;
     }
@@ -58,8 +66,7 @@ public class Complaint  implements Serializable {
         this.status = status;
     }
 
-    @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
+
     public Date getRaisedDate() {
         return raisedDate;
     }
@@ -68,8 +75,7 @@ public class Complaint  implements Serializable {
         this.raisedDate = raisedDate;
     }
 
-    @UpdateTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
+
     public Date getUpdatedDate() {
         return updatedDate;
     }
@@ -78,8 +84,7 @@ public class Complaint  implements Serializable {
         this.updatedDate = updatedDate;
     }
 
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-    @JoinColumn(name = "accountNo")
+
     public Customer getCustomer() {
         return customer;
     }

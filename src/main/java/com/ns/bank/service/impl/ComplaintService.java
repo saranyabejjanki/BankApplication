@@ -111,4 +111,9 @@ public class ComplaintService implements IComplaintService {
     public Integer getComplaintCountByStatusId(Long statusId) {
         return  complaintRepository.getCompalintCountByStatus(statusId);
     }
+
+    @Override
+    public Integer getComplaintCount() {
+        return complaintRepository.getComplaintsCount();
+    }
 }

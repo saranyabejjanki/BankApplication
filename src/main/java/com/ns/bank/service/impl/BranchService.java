@@ -12,9 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
-import static java.util.Objects.nonNull;
 @Service
 public class BranchService implements IBranchService {
 
@@ -139,5 +137,15 @@ public class BranchService implements IBranchService {
         userEntities.forEach(user->userModels.add(userMapper.convertEntityToModel((user))));
         return userModels;
 
+    }
+
+    @Override
+    public Integer getAllBranchesCount() {
+        return branchRepository.getAllBranchesCount();
+    }
+
+    @Override
+    public List<Object> getAllBranchesBalance() {
+        return branchRepository.getAllBranchesBalance();
     }
 }

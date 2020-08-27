@@ -14,7 +14,7 @@ public class Withdraw  implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne()
     @JoinColumn(name = "customerId")
     private Customer customer;
 
@@ -24,7 +24,7 @@ public class Withdraw  implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date withdrawDate;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne()
     @JoinColumn(name = "statusId")
     private Status status;
 

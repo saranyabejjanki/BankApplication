@@ -10,10 +10,20 @@ import java.util.Set;
 @Table(name="loan")
 public class Loan  implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customeId", nullable = false)
     private Customer customer;
+    @Column(name = "loanAmount")
     private  Double loanAmount;
+    @ManyToOne( fetch = FetchType.LAZY)
+    @JoinColumn(name = "statusId", nullable = false)
     private Status status;
+
+    @ManyToOne( fetch = FetchType.LAZY)
+    @JoinColumn(name = "loanTypeId", nullable = false)
     private LoanType loanType;
 
     public Loan() {
@@ -27,8 +37,7 @@ public class Loan  implements Serializable {
         this.loanType = loanType;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     public Long getId() {
         return id;
     }
@@ -37,8 +46,7 @@ public class Loan  implements Serializable {
         this.id = id;
     }
 
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-    @JoinColumn(name = "customeId", nullable = false)
+
     public Customer getCustomer() {
         return customer;
     }
@@ -46,7 +54,7 @@ public class Loan  implements Serializable {
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
-    @Column(name = "loanAmount")
+
     public Double getLoanAmount() {
         return loanAmount;
     }
@@ -54,8 +62,7 @@ public class Loan  implements Serializable {
     public void setLoanAmount(Double loanAmount) {
         this.loanAmount = loanAmount;
     }
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-    @JoinColumn(name = "statusId", nullable = false)
+
     public Status getStatus() {
         return status;
     }
@@ -65,8 +72,6 @@ public class Loan  implements Serializable {
     }
 
 
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-    @JoinColumn(name = "loanTypeId", nullable = false)
     public LoanType getLoanType() {
         return loanType;
     }

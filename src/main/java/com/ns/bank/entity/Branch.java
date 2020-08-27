@@ -10,23 +10,33 @@ import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Table(name="branch")
-public class Branch  implements Serializable {
+@Table(name = "branch")
+public class Branch implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long branchCode;
+    @Column(name = "name")
     private String name;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "addressId")
     private Address address;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "branch")
     private Set<User> users;
+    @Column(name = "phoneNo")
     private Long phoneNo;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "branchName")
     private Set<Customer> customers;
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "CreatedDate")
     private Date createdDate;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "rowStatusId")
     private RowStatus rowStatus;
-
-
 
     public Branch() {
     }
-
     public Branch(Long branchCode, String name, Address address, Set<User> users, Long phoneNo, Set<Customer> customers, Date createdDate, RowStatus rowStatus) {
         this.branchCode = branchCode;
         this.name = name;
@@ -38,17 +48,16 @@ public class Branch  implements Serializable {
         this.rowStatus = rowStatus;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     public Long getBranchCode() {
         return branchCode;
     }
 
-    public void setBranchCode( Long branchCode) {
+    public void setBranchCode(Long branchCode) {
         this.branchCode = branchCode;
     }
 
-    @Column(name = "name")
+
     public String getName() {
         return name;
     }
@@ -57,8 +66,7 @@ public class Branch  implements Serializable {
         this.name = name;
     }
 
-    @ManyToOne(cascade=CascadeType.MERGE,fetch = FetchType.LAZY)
-    @JoinColumn(name = "addressId")
+
     public Address getAddress() {
         return address;
     }
@@ -67,7 +75,7 @@ public class Branch  implements Serializable {
         this.address = address;
     }
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "branch")
+
     //@JsonBackReference(value="branch-users")
     public Set<User> getUsers() {
         return users;
@@ -77,7 +85,7 @@ public class Branch  implements Serializable {
         this.users = users;
     }
 
-    @Column(name = "phoneNo")
+
     public Long getPhoneNo() {
         return phoneNo;
     }
@@ -86,7 +94,7 @@ public class Branch  implements Serializable {
         this.phoneNo = phoneNo;
     }
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy="branchName")
+
     //@JsonBackReference(value="branch-customers")
     public Set<Customer> getCustomers() {
         return customers;
@@ -96,20 +104,17 @@ public class Branch  implements Serializable {
         this.customers = customers;
     }
 
-    @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "CreatedDate")
+
     public Date getCreatedDate() {
         return createdDate;
     }
-
 
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
     }
 
-    @ManyToOne(cascade=CascadeType.MERGE)
-    @JoinColumn(name = "rowStatusId")
+//    @ManyToOne(cascade=CascadeType.MERGE)
+
     public RowStatus getRowStatus() {
         return rowStatus;
     }

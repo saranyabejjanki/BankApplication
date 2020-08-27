@@ -19,4 +19,6 @@ public interface IUserService {
     UserModel findUserByEmailAndPassword(String email, String password);
     UserModel findUserByEmail(String email);
     Integer getCountOfUsersByBranchCode(Long brachCode);
+
+    Integer getAllUsersCount();
 }

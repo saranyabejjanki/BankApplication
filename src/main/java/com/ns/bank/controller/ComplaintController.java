@@ -43,8 +43,16 @@ public class ComplaintController {
     @GetMapping(path="/count/{status-id}")
     public ResponseEntity<?> getComplaintCountByStatusId(@PathVariable("status-id") Long statusId){
          Integer count=complaintService.getComplaintCountByStatusId(statusId);
-        return new ResponseEntity<>("Complaint(s) Count---"+count,HttpStatus.OK);
+        return new ResponseEntity<>(count,HttpStatus.OK);
     }
+
+    @GetMapping(path="/count")
+    public ResponseEntity<?> getComplaintCount(){
+        Integer count=complaintService.getComplaintCount();
+        return new ResponseEntity<>(count,HttpStatus.OK);
+    }
+
+
 
     @GetMapping(path = "/customers/{account-number}")
     public ResponseEntity<?> fetchComplaintByAccountNumber(/*@PathVariable("complaint-id") Long complaintId*/@PathVariable("account-number") Long accountNumber) throws Exception {

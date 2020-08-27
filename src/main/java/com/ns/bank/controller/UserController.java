@@ -17,7 +17,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetails;
 import java.util.*;
 import static java.util.Objects.nonNull;
-@CrossOrigin(origins = "http:localhost:4200")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(path = "/api/users")
 public class UserController {
@@ -164,7 +164,12 @@ public class UserController {
     @GetMapping(path = "count/{branch-id}")
     public  ResponseEntity<?> getUsersCountByBranchId(@PathVariable("branch-id") Long branchId){
                 Integer count=userService.getCountOfUsersByBranchCode(branchId);
-         return  new ResponseEntity<>("User(s) Count---"+count,HttpStatus.OK);
+         return  new ResponseEntity<>(count,HttpStatus.OK);
+    }
+    @GetMapping(path = "count")
+    public  ResponseEntity<?> getUsersAllCount(){
+        Integer count=userService.getAllUsersCount();
+        return  new ResponseEntity<>(count,HttpStatus.OK);
     }
 
 }

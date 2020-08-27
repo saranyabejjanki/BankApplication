@@ -146,6 +146,11 @@ public class UserService implements IUserService , UserDetailsService {
     }
 
     @Override
+    public Integer getAllUsersCount() {
+        return userRepository.getAllUsersCount();
+    }
+
+    @Override
     public List<UserModel> getAllUsers() {
         List<User> users = userRepository.findAll();
         List<UserModel> userModels = new ArrayList<>();

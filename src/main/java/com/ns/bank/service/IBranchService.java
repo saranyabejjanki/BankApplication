@@ -1,6 +1,5 @@
 package com.ns.bank.service;
 
-import com.ns.bank.entity.User;
 import com.ns.bank.model.*;
 
 
@@ -16,4 +15,8 @@ public interface IBranchService {
     public List<UserModel> getAllUsersByBranchCode(Long branchCode);
     public List<CustomerModel> getAllCustomersByBranchCode(Long branchCode);
     public List<UserModel> getAllUsersByRowStatusId(Long rowStatusId);
+
+    Integer getAllBranchesCount();
+
+    List<Object> getAllBranchesBalance();
 }

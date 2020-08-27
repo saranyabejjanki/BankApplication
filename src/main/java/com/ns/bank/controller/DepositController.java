@@ -16,7 +16,7 @@ import java.util.List;
 import static java.util.Objects.nonNull;
 
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping(path = "api/deposits")
 public class DepositController {

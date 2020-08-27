@@ -19,4 +19,9 @@ public interface ICustomerService {
     Integer updateBalanceByAccountNumber(Double amount,Long accountNumber);
 
 
+    Integer getAllCustomersCount();
+
+    Integer getAllCustomersCountByBranch(Long branchCode);
+
+    Integer getBankBalance();
 }

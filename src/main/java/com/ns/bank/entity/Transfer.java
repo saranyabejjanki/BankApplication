@@ -12,13 +12,13 @@ public class Transfer  implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne()
     private Customer customer;
 
     private Long receiverAccountNumber;
     private Double amount;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne()
     @JoinColumn(name = "statusId")
     private Status status;
 

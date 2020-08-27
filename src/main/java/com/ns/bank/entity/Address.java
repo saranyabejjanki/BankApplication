@@ -10,14 +10,24 @@ import java.util.Set;
 @Entity
 @Table(name="address")
 public class Address  implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "city")
     private String city;
+    @Column(name = "state")
     private String state;
+    @Column(name = "country")
     private String country;
+    @Column(name = "pinCode")
     private Integer pinCode;
+    @Column(name = "street")
     private String  street;
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "address")
     private Set<Branch> branches;
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "address")
     private Set<User> users;
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "address")
     private Set<Customer> customers;
 
     public Address() {
@@ -31,8 +41,7 @@ public class Address  implements Serializable {
         this.pinCode = pinCode;
         this.street = street;
     }
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     public Long getId() {
         return id;
     }
@@ -41,11 +50,10 @@ public class Address  implements Serializable {
         this.id = id;
     }
 
-    @Column(name = "city")
     public String getCity() {
         return city;
     }
-    @Column(name = "pinCode")
+
     public Integer getPinCode() {
         return pinCode;
     }
@@ -57,7 +65,7 @@ public class Address  implements Serializable {
     public void setCity(String city) {
         this.city = city;
     }
-    @Column(name = "state")
+
     public String getState() {
         return state;
     }
@@ -65,7 +73,7 @@ public class Address  implements Serializable {
     public void setState(String state) {
         this.state = state;
     }
-    @Column(name = "country")
+
     public String getCountry() {
         return country;
     }
@@ -74,7 +82,6 @@ public class Address  implements Serializable {
         this.country = country;
     }
 
-    @Column(name = "street")
     public String getStreet() {
         return street;
     }
@@ -94,20 +101,20 @@ public class Address  implements Serializable {
     public void setCustomers(Set<Customer> customers) {
         this.customers = customers;
     }
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "address")
+
     //@JsonBackReference
     public Set<Branch> getBranches() {
         return branches;
     }
 
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "address")
+
    // @JsonBackReference
     public Set<User> getUsers() {
         return users;
     }
 
     //@JsonBackReference
-    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "address")
+
     public Set<Customer> getCustomers() {
         return customers;
     }

@@ -12,13 +12,23 @@ import java.util.Set;
 @Table(name="accountType")
 public class AccountType  implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "interest")
     private Float interest;
+    @Column(name = "minBalance")
     private Double minBalance;
+    @Column(name = "withdrawLimit")
     private Double withdrawLimit;
+    @Column(name = "transactionLimit")
     private Integer transactionLimit;
+    @ManyToOne()
+    @JoinColumn(name = "eligibilityId")
     private Eligibility eligibilityId;
+    @OneToMany(mappedBy = "accountType",cascade=CascadeType.ALL,fetch = FetchType.LAZY)
     private Set<LoanType> loanTypes;
 
     public AccountType() {
@@ -38,8 +48,7 @@ public class AccountType  implements Serializable {
         this.loanTypes = loanTypes;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     public Long getId() {
         return id;
     }
@@ -47,7 +56,7 @@ public class AccountType  implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    @Column(name = "name")
+
     public String getName() {
         return name;
     }
@@ -56,7 +65,7 @@ public class AccountType  implements Serializable {
         this.name = name;
     }
 
-    @Column(name = "interest")
+
     public Float getInterest() {
         return interest;
     }
@@ -64,7 +73,7 @@ public class AccountType  implements Serializable {
     public void setInterest(Float interest) {
         this.interest = interest;
     }
-    @Column(name = "minBalance")
+
     public Double getMinBalance() {
         return minBalance;
     }
@@ -72,7 +81,7 @@ public class AccountType  implements Serializable {
     public void setMinBalance(Double minBalance) {
         this.minBalance = minBalance;
     }
-    @Column(name = "withdrawLimit")
+
     public Double getWithdrawLimit() {
         return withdrawLimit;
     }
@@ -81,7 +90,7 @@ public class AccountType  implements Serializable {
         this.withdrawLimit = withdrawLimit;
     }
 
-    @Column(name = "transactionLimit")
+
     public Integer getTransactionLimit() {
         return transactionLimit;
     }
@@ -91,8 +100,7 @@ public class AccountType  implements Serializable {
     }
 
 
-    @ManyToOne(cascade=CascadeType.MERGE)
-    @JoinColumn(name = "eligibilityId")
+
     public Eligibility getEligibilityId() {
         return eligibilityId;
     }
@@ -101,7 +109,6 @@ public class AccountType  implements Serializable {
         this.eligibilityId = eligibilityId;
     }
 
-    @OneToMany(mappedBy = "accountType",cascade=CascadeType.ALL,fetch = FetchType.LAZY)
 
     public Set<LoanType> getLoanTypes() {
         return loanTypes;

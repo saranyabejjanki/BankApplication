@@ -11,10 +11,19 @@ import java.util.Date;
 public class Deposit  implements Serializable {
 
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name="depositAmount")
     private Double depositAmount;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="statusId")
     private Status status;
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     private Date transactionDate;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="customerId")
     private Customer customer;
 
 
@@ -29,8 +38,7 @@ public class Deposit  implements Serializable {
         this.customer = customer;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     public Long getId() {
         return id;
     }
@@ -38,7 +46,7 @@ public class Deposit  implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    @Column(name="depositAmount")
+
     public Double getDepositAmount() {
         return depositAmount;
     }
@@ -47,8 +55,7 @@ public class Deposit  implements Serializable {
         this.depositAmount = depositAmount;
     }
 
-    @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
+
     public Date getTransactionDate() {
         return transactionDate;
     }
@@ -57,8 +64,7 @@ public class Deposit  implements Serializable {
         this.transactionDate = transactionDate;
     }
 
-    @ManyToOne(cascade=CascadeType.MERGE,fetch = FetchType.LAZY)
-    @JoinColumn(name="statusId")
+
     public Status getStatus() {
         return status;
     }
@@ -66,8 +72,7 @@ public class Deposit  implements Serializable {
     public void setStatus(Status status) {
         this.status = status;
     }
-    @ManyToOne(cascade=CascadeType.MERGE,fetch = FetchType.LAZY)
-    @JoinColumn(name="customerId")
+
     public Customer getCustomer() {
         return customer;
     }
