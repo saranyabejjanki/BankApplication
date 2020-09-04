@@ -3,8 +3,10 @@ package com.ns.bank.service.impl;
 import com.ns.bank.entity.Complaint;
 import com.ns.bank.mapper.ComplaintMapper;
 import com.ns.bank.model.ComplaintModel;
+import com.ns.bank.model.DepositModel;
 import com.ns.bank.repository.ComplaintRepository;
 import com.ns.bank.service.IComplaintService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,10 @@ public class ComplaintService implements IComplaintService {
 
     @Autowired
     private ComplaintMapper complaintMapper;
+
+    @Autowired
+    private ModelMapper modelMapper;
+
     @Override
     public List<ComplaintModel> fetchAllComplaints() {
 
@@ -99,12 +105,11 @@ public class ComplaintService implements IComplaintService {
     }
 
     @Override
-    public ComplaintModel updateStatus(Long statusId,Long complaintId) {
-        Complaint complaint =complaintRepository.updateStatus(statusId,complaintId);
-        ComplaintModel complaintModel=new ComplaintModel();
-        if(nonNull(complaint))
-            complaintModel=complaintMapper.convertEntityToModel(complaint);
-        return  complaintModel;
+    public Integer updateStatus(Long statusId,Long complaintId) {
+       Integer value =complaintRepository.updateStatus(statusId,complaintId);
+
+
+        return  value;
     }
 
     @Override
@@ -115,5 +120,13 @@ public class ComplaintService implements IComplaintService {
     @Override
     public Integer getComplaintCount() {
         return complaintRepository.getComplaintsCount();
+    }
+
+    @Override
+    public List<ComplaintModel> getComplaintsByBranchCode(Long branchId) {
+        List<Complaint> complaintEntities= complaintRepository.getComplaintsByBranchId(branchId);
+        List<ComplaintModel> complaintModels=new ArrayList<>();
+        complaintEntities.forEach(complaint -> complaintModels.add(complaintMapper.convertEntityToModel((complaint))));
+        return complaintModels;
     }
 }

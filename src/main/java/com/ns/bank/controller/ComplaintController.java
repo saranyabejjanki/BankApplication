@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Objects;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins ="*")
 @RestController
-@RequestMapping("/api/complaints")
+@RequestMapping(path="/api/complaints")
 public class ComplaintController {
 
     @Autowired
@@ -52,6 +52,11 @@ public class ComplaintController {
         return new ResponseEntity<>(count,HttpStatus.OK);
     }
 
+    @GetMapping(path="branch/{branch-id}")
+    public ResponseEntity<?> fetchComplaintsByBranch(@PathVariable("branch-id") Long branchId ){
+        List<ComplaintModel> complaintList = complaintService.getComplaintsByBranchCode(branchId);
+        return new ResponseEntity<>(complaintList, complaintList.size()!=0 ? HttpStatus.OK: HttpStatus.NO_CONTENT);
+    }
 
 
     @GetMapping(path = "/customers/{account-number}")
@@ -63,8 +68,6 @@ public class ComplaintController {
            // return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         //}
     }
-
-
 
 
     @GetMapping(path = "/statuses/{status-id}")
@@ -95,13 +98,13 @@ public class ComplaintController {
             return null;
         }
     }
-  @PutMapping(path="{complaint-id}/statuses/{status-id}")
+  @PutMapping(path="{complaint-id}/status/{status-id}")
     public ResponseEntity<?> updateComplaintByStatusId(@PathVariable("complaint-id") Long complaintId,@PathVariable("status-id") Long statusId,@RequestBody ComplaintModel complaintModel) throws Exception{
         HttpStatus status;
        if(complaintService.checkIfComplaintExists(complaintId)){
-            ComplaintModel complaint= complaintService.updateComplaint(complaintModel);
-            status = Objects.nonNull(complaint) ? HttpStatus.OK: HttpStatus.BAD_REQUEST;
-            return new ResponseEntity<>(status);
+            Integer result= complaintService.updateStatus(statusId,complaintId);
+            status = result>0 ? HttpStatus.OK: HttpStatus.BAD_REQUEST;
+            return new ResponseEntity<>(result,status);
         }
         else{
             //  throw new UserNotFoundException("User id '" + userId + "' does not exist");

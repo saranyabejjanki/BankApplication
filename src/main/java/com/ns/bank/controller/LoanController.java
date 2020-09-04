@@ -6,12 +6,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.Objects;
 
-@Controller
-@CrossOrigin(origins = "*")
-@RequestMapping(path = "api/loans")
+@CrossOrigin(origins="*")
+@RestController
+@RequestMapping("api/loans")
 public class LoanController {
 
     @Autowired
