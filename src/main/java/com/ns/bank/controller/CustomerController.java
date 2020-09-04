@@ -36,7 +36,6 @@ public class CustomerController {
             status = HttpStatus.OK;
         } else
             status = HttpStatus.NO_CONTENT;
-
         return new ResponseEntity<>(customerModel, status);
     }
 
@@ -49,7 +48,6 @@ public class CustomerController {
       //  }
         //else
            // status = HttpStatus.NOT_ACCEPTABLE;
-
         return new ResponseEntity<>(customerModel,status);
     }
 
@@ -60,7 +58,6 @@ public class CustomerController {
         customerModel = customerService.createCustomer(customerModel);
         return new ResponseEntity<>(customerModel,HttpStatus.OK);
     }
-
     @GetMapping(path = "/status/{status-id}")
     public ResponseEntity<?> getAllCustomersByStatusId(@PathVariable("status-id") Long statusId) {
         List<CustomerModel> customerModelList = customerService.getCustomersByStatusId(statusId);
@@ -69,13 +66,13 @@ public class CustomerController {
     }
     @GetMapping(path = "/branch/{branch-id}")
     public ResponseEntity<?> getAllCustomersByBranchId(@PathVariable("branch-id") Long branchId) {
-        List<CustomerModel> customerModelList = customerService.getCustomersByStatusId(branchId);
+        List<CustomerModel> customerModelList = customerService.getCustomersByBranchId(branchId);
         return new ResponseEntity<>(customerModelList,
                 customerModelList.size() > 0 ? HttpStatus.OK : HttpStatus.NO_CONTENT);
     }
     @GetMapping(path = "/account-type/{account-type-id}")
     public ResponseEntity<?> getAllCustomersByAccountTypeId(@PathVariable("account-type-id") Long accountTypeId) {
-        List<CustomerModel> customerModelList = customerService.getCustomersByStatusId(accountTypeId);
+        List<CustomerModel> customerModelList = customerService.getCustomersByAccountTypeId(accountTypeId);
         return new ResponseEntity<>(customerModelList,
                 customerModelList.size() > 0 ? HttpStatus.OK : HttpStatus.NO_CONTENT);
     }
@@ -99,7 +96,6 @@ public class CustomerController {
     public Integer getBankBalance(){
         return customerService.getBankBalance();
     }
-
 
     @GetMapping(path = "count")
     public ResponseEntity<?> getAllCustomersCount(){

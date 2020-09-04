@@ -6,7 +6,6 @@ import com.ns.bank.model.ComplaintModel;
 import java.util.List;
 
 public interface IComplaintService {
-
     List<ComplaintModel> fetchAllComplaints();
     Boolean checkIfComplaintExists(Long complaintId);
     ComplaintModel fetchComplaintById(Long complaintId);
@@ -18,4 +17,7 @@ public interface IComplaintService {
     ComplaintModel updateStatus(Long statusId,Long complaintId);
     Integer getComplaintCountByStatusId(Long statusId);
     Integer getComplaintCount();
+    List<ComplaintModel> fetchComplaintByStatusIdAndBranchId(Long statusId, Long branchId);
+
+    Integer fetchComplaintsCountByStatusIdAndBranchId(Long statusId, Long branchId);
 }

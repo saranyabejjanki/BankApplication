@@ -73,6 +73,23 @@ public class ComplaintController {
             List<ComplaintModel> complaintModels = complaintService.fetchComplaintByStatusId(statusId);
             return new ResponseEntity<>(complaintModels, HttpStatus.OK);
     }
+
+    @GetMapping(path = "/statuses/{status-id}/branches/{branch-id}")
+    public ResponseEntity<?> fetchComplaintsByStatusIdAndBranchId(@PathVariable("status-id") Long statusId,
+                                                                 @PathVariable("branch-id") Long branchId) throws Exception {
+
+        List<ComplaintModel> complaintModels = complaintService.fetchComplaintByStatusIdAndBranchId(statusId,branchId);
+        return new ResponseEntity<>(complaintModels, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/count/statuses/{status-id}/branches/{branch-id}")
+    public ResponseEntity<?> fetchComplaintsCountByStatusIdAndBranchId(@PathVariable("status-id") Long statusId,
+                                                                  @PathVariable("branch-id") Long branchId) throws Exception {
+
+        Integer count = complaintService.fetchComplaintsCountByStatusIdAndBranchId(statusId,branchId);
+        return new ResponseEntity<>(count, HttpStatus.OK);
+    }
+
     @RequestMapping(method=RequestMethod.POST)
     public ResponseEntity<?> createComplaint(@RequestBody ComplaintModel complaintModel) throws Exception {
         HttpStatus status;
