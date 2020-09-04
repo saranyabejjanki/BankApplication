@@ -21,5 +21,8 @@ public interface WithdrawRepository extends JpaRepository<Withdraw, Long> {
     @Modifying
     @Query(nativeQuery = true,value = "UPDATE bankapplication.withdraw SET status_id=:statusId WHERE id=:withdrawId")
     int updateWithdrawStatus(@Param("statusId") Long statusId, @Param("withdrawId") Long withdrawId);
+    @Query(nativeQuery =true,value="SELECT * FROM bankapplication.withdraw where date_format(withdraw_date, '%Y-%m' ) = ? AND status_id=?")
+    List<Withdraw> getWithdrawsByYearMonthAndStatusId(String yearMonth,Long statusId);
+
 
 }

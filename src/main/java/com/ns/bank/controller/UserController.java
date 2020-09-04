@@ -171,5 +171,4 @@ public class UserController {
         Integer count=userService.getAllUsersCount();
         return  new ResponseEntity<>(count,HttpStatus.OK);
     }
-
 }

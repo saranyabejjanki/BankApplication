@@ -14,9 +14,10 @@ public interface IComplaintService {
     Boolean deleteComplaintById(Long complaintId);
     List<ComplaintModel> fetchComplaintByStatusId(Long statusId);
     List<ComplaintModel> fetchComplaintByAccountNumber(Long account_no);
-    ComplaintModel updateStatus(Long statusId,Long complaintId);
+    Integer updateStatus(Long statusId,Long complaintId);
     Integer getComplaintCountByStatusId(Long statusId);
     Integer getComplaintCount();
+    List<ComplaintModel> getComplaintsByBranchCode(Long branchId);
     List<ComplaintModel> fetchComplaintByStatusIdAndBranchId(Long statusId, Long branchId);
 
     Integer fetchComplaintsCountByStatusIdAndBranchId(Long statusId, Long branchId);

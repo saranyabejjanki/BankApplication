@@ -99,12 +99,11 @@ public class ComplaintService implements IComplaintService {
     }
 
     @Override
-    public ComplaintModel updateStatus(Long statusId,Long complaintId) {
-        Complaint complaint =complaintRepository.updateStatus(statusId,complaintId);
-        ComplaintModel complaintModel=new ComplaintModel();
-        if(nonNull(complaint))
-            complaintModel=complaintMapper.convertEntityToModel(complaint);
-        return  complaintModel;
+    public Integer updateStatus(Long statusId,Long complaintId) {
+       Integer value =complaintRepository.updateStatus(statusId,complaintId);
+
+
+        return  value;
     }
 
     @Override
@@ -125,5 +124,13 @@ public class ComplaintService implements IComplaintService {
     @Override
     public Integer fetchComplaintsCountByStatusIdAndBranchId(Long statusId, Long branchId) {
         return complaintRepository.getCompalintCountByStatusAndBranchId(statusId,branchId);
+    }
+
+    @Override
+    public List<ComplaintModel> getComplaintsByBranchCode(Long branchId) {
+        List<Complaint> complaintEntities= complaintRepository.getComplaintsByBranchId(branchId);
+        List<ComplaintModel> complaintModels=new ArrayList<>();
+        complaintEntities.forEach(complaint -> complaintModels.add(complaintMapper.convertEntityToModel((complaint))));
+        return complaintModels;
     }
 }
