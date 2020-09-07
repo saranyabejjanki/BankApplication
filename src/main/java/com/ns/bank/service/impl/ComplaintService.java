@@ -123,7 +123,7 @@ public class ComplaintService implements IComplaintService {
 
     @Override
     public Integer fetchComplaintsCountByStatusIdAndBranchId(Long statusId, Long branchId) {
-        return complaintRepository.getCompalintCountByStatusAndBranchId(statusId,branchId);
+        return complaintRepository.getCompalintsCountByStatusAndBranchId(statusId,branchId);
     }
 
     @Override
