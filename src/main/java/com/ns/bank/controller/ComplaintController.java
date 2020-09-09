@@ -28,7 +28,11 @@ public class ComplaintController {
         List<ComplaintModel> complaintList = complaintService.fetchAllComplaints();
         return new ResponseEntity<>(complaintList, complaintList.size()!=0 ? HttpStatus.OK: HttpStatus.NO_CONTENT);
     }
-
+    @GetMapping(path="/count/customer/{account-number}")
+    public ResponseEntity<?> getComplaintCountByAccountNo(@PathVariable("account-number") Long accountNumber){
+        Integer count=complaintService.getComplaintsCountByAccountNumber(accountNumber);
+        return new ResponseEntity<>(count,HttpStatus.OK);
+    }
     @GetMapping(path = "/{complaint-id}")
     public ResponseEntity<?> fetchComplaintById(@PathVariable("complaint-id") Long complaintId) throws Exception {
         if (complaintService.checkIfComplaintExists(complaintId)) {
@@ -45,6 +49,8 @@ public class ComplaintController {
          Integer count=complaintService.getComplaintCountByStatusId(statusId);
         return new ResponseEntity<>(count,HttpStatus.OK);
     }
+
+
 
     @GetMapping(path="/count")
     public ResponseEntity<?> getComplaintCount(){
@@ -108,7 +114,7 @@ public class ComplaintController {
        if(complaintService.checkIfComplaintExists(complaintId)){
             ComplaintModel complaint= complaintService.updateComplaint(complaintModel);
             status = Objects.nonNull(complaint) ? HttpStatus.OK: HttpStatus.BAD_REQUEST;
-            return new ResponseEntity<>(status);
+            return new ResponseEntity<>(complaint,status);
         }
         else{
             //  throw new UserNotFoundException("User id '" + userId + "' does not exist");

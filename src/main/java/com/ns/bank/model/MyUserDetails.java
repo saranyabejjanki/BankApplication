@@ -18,6 +18,14 @@ public class MyUserDetails implements UserDetails {
     private String role;
     private Long branchCode;
 
+//    public MyUserDetails(UserModel userModel, Long id, String name, String role,Long branchCode, Collection<? extends GrantedAuthority> authorities) {
+//        this.userModel = userModel;
+//        this.id = id;
+//        this.name = name;
+//        this.role = role;
+//        this.branchCode = branchCode;
+//        this.authorities = authorities;
+//    }
 
     private Collection<? extends GrantedAuthority> authorities;
 
@@ -25,12 +33,12 @@ public class MyUserDetails implements UserDetails {
         this.userModel = userModel;
     }
 
-    public MyUserDetails(UserModel userModel, Long id, String name, Collection<? extends GrantedAuthority> authorities) {
-        this.userModel = userModel;
-        this.id = id;
-        this.name = name;
-        this.authorities = authorities;
-    }
+//    public MyUserDetails(UserModel userModel, Long id, String name, Collection<? extends GrantedAuthority> authorities) {
+//        this.userModel = userModel;
+//        this.id = id;
+//        this.name = name;
+//        this.authorities = authorities;
+//    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

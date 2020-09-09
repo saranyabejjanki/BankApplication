@@ -72,4 +72,9 @@ public class WithdrawService implements IWithdrawService {
         withdrawEntities.forEach(withdraw->  withdrawsModels.add(modelMapper.map(withdraw, WithdrawModel.class)));
         return withdrawsModels;
     }
+
+    @Override
+    public Integer getWithdrawsCountByAccountNumber(Long accountNumber) {
+        return withdrawRepository.getWithdrawsCountByAccountNumber(accountNumber);
+    }
 }

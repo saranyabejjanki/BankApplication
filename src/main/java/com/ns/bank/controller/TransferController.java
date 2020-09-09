@@ -41,7 +41,7 @@ public class TransferController {
             }
         } else {
 
-            return new ResponseEntity<>( "Deposit with Id" + transferId + "doesn't exist", HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>("Deposit with Id" + transferId + "doesn't exist", HttpStatus.NO_CONTENT);
         }
     }
 
@@ -130,7 +130,7 @@ public class TransferController {
                 transferModelList.size() > 0 ? HttpStatus.OK : HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping(path = "{/customer/account-number}")
+    @GetMapping(path = "/customer/{account-number}")
     public ResponseEntity<?> getAllTransfersByAccountNumber(@PathVariable("account-number") Long accountNumber) {
         List<TransferModel> transferModelList = transferService.getTransfersByAccountNumber(accountNumber);
         System.out.println("transferList" + transferModelList);
@@ -138,5 +138,10 @@ public class TransferController {
                 transferModelList.size() > 0 ? HttpStatus.OK : HttpStatus.NO_CONTENT);
     }
 
-
+    @GetMapping(path = "/count/{account-number}")
+    public ResponseEntity<?> getAllTransfersCountByAccountNumber(@PathVariable("account-number") Long accountNumber) {
+        Integer count = transferService.getTransfersCountByAccountNumber(accountNumber);
+        return new ResponseEntity<>(count,
+                count > 0 ? HttpStatus.OK : HttpStatus.NO_CONTENT);
+    }
 }

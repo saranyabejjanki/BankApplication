@@ -10,4 +10,5 @@ public interface IWithdrawService {
     int updateWithdrawStatus(Long statusId,Long withdrawId);
     List<WithdrawModel> getAllWithdrawByStatusId(Long statusId);
     List<WithdrawModel> getWithdrawsByAccountNumber(Long accountNumber);
+    Integer getWithdrawsCountByAccountNumber(Long accountNumber);
 }

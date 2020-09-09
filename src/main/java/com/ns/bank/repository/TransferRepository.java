@@ -23,4 +23,7 @@ public interface TransferRepository extends JpaRepository<Transfer, Long> {
     @Query(nativeQuery = true,value = "UPDATE bankapplication.transfer SET status_id=:statusId WHERE id=:transferId")
     int updateTransferStatus(@Param("statusId") Long statusId, @Param("transferId") Long transferId);
 
+    @Query(nativeQuery = true,value="SELECT COUNT(*) FROM bankapplication.transfer WHERE  customer_account_no=?1")
+    Integer getTransfersCountByAccountNumber(Long accountNumber);
+
 }

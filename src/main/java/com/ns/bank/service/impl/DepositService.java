@@ -71,4 +71,9 @@ public class DepositService implements IDepositService {
         depositEntities.forEach(deposit->  depositsModels.add(modelMapper.map(deposit, DepositModel.class)));
         return depositsModels;
     }
+
+    @Override
+    public Integer getDepositsCountByAccountNumber(Long accountNumber) {
+        return depositRepository.getDepositsCountByAccountNumber(accountNumber);
+    }
 }

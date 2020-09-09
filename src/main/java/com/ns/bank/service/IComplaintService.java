@@ -21,4 +21,5 @@ public interface IComplaintService {
     List<ComplaintModel> fetchComplaintByStatusIdAndBranchId(Long statusId, Long branchId);
 
     Integer fetchComplaintsCountByStatusIdAndBranchId(Long statusId, Long branchId);
+    Integer getComplaintsCountByAccountNumber(Long accountNumber);
 }

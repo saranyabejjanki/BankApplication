@@ -24,4 +24,6 @@ public interface DepositRepository extends JpaRepository<Deposit, Long> {
     @Query(nativeQuery = true,value = "UPDATE bankapplication.deposit SET status_id=:statusId WHERE id=:depositId")
     int updateDepositStatus(@Param("statusId") Long statusId, @Param("depositId") Long depositId);
 
+    @Query(nativeQuery = true,value = "SELECT COUNT(*) FROM bankapplication.deposit WHERE customer_id=?1")
+    Integer getDepositsCountByAccountNumber(Long accountNumber);
 }

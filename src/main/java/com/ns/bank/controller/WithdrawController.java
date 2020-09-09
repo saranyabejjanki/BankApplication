@@ -1,4 +1,5 @@
 package com.ns.bank.controller;
+
 import com.ns.bank.model.RowStatusModel;
 import com.ns.bank.model.StatusModel;
 import com.ns.bank.model.WithdrawModel;
@@ -8,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
+
 import static java.util.Objects.nonNull;
 
 @CrossOrigin(origins = "*")
@@ -26,6 +29,7 @@ public class WithdrawController {
         return new ResponseEntity<>(withdrawModelList,
                 withdrawModelList.size() > 0 ? HttpStatus.OK : HttpStatus.NO_CONTENT);
     }
+
     @GetMapping(path = "/{withdraw-id}")
     public ResponseEntity<?> getWithdrawById(@PathVariable("withdraw-id") Long withdrawId, @PathVariable("account-number") Long accountNumber) {
         String message = null;
@@ -42,6 +46,7 @@ public class WithdrawController {
             return new ResponseEntity<>(message, HttpStatus.NO_CONTENT);
         }
     }
+
     @PutMapping(path = "/{withdraw-id}/status")
     public ResponseEntity<?> changeWithdrawStatus(@PathVariable("withdraw-id") Long withdrawId, @RequestBody RowStatusModel rowStatusModel) {
         Integer statusId = 0;
@@ -73,8 +78,8 @@ public class WithdrawController {
                 if (customerService.checkAccountNumberExists(withdrawModel.getCustomerModel().getAccountNo())) {
                     Double balance = customerService.getBalanceById(withdrawModel.getCustomerModel().getAccountNo());
                     if (balance > withdrawModel1.getWithdrawAmount()) {
-                       // balance = balance - withdrawModel1.getWithdrawAmount();
-                        int result = customerService.updateBalanceByAccountNumber(- withdrawModel1.getWithdrawAmount(), withdrawModel.getCustomerModel().getAccountNo());
+                        // balance = balance - withdrawModel1.getWithdrawAmount();
+                        int result = customerService.updateBalanceByAccountNumber(-withdrawModel1.getWithdrawAmount(), withdrawModel.getCustomerModel().getAccountNo());
                         if (result > 0) {
                             int value = withdrawService.updateWithdrawStatus(6L, withdrawModel1.getId());
                             status = value > 0 ? HttpStatus.OK : HttpStatus.NOT_MODIFIED;
@@ -82,12 +87,12 @@ public class WithdrawController {
                         } else {
                             int value = withdrawService.updateWithdrawStatus(8L, withdrawModel1.getId());
                             status = value > 0 ? HttpStatus.OK : HttpStatus.NOT_MODIFIED;
-                           // Double userBalance = customerService.getBalanceById(withdrawModel.getCustomerModel().getAccountNo());
-                           // userBalance = userBalance + withdrawModel1.getWithdrawAmount();
+                            // Double userBalance = customerService.getBalanceById(withdrawModel.getCustomerModel().getAccountNo());
+                            // userBalance = userBalance + withdrawModel1.getWithdrawAmount();
                             int result1 = customerService.updateBalanceByAccountNumber(withdrawModel1.getWithdrawAmount(), withdrawModel.getCustomerModel().getAccountNo());
                             if (result1 > 0) {
                                 int value1 = withdrawService.updateWithdrawStatus(9L, withdrawModel1.getId());
-                                status = value1 > 0 ? HttpStatus.OK: HttpStatus.NOT_MODIFIED;
+                                status = value1 > 0 ? HttpStatus.OK : HttpStatus.NOT_MODIFIED;
                                 return new ResponseEntity<>("Deducted Amount will be Refunded", status);
                             } else {
                                 int value2 = withdrawService.updateWithdrawStatus(2L, withdrawModel1.getId());
@@ -97,7 +102,7 @@ public class WithdrawController {
                         return new ResponseEntity<>(withdrawModel1, status);
                     } else {
                         int value = withdrawService.updateWithdrawStatus(8L, withdrawModel1.getId());
-                        return new ResponseEntity<>("Insufficient Balance",HttpStatus.INTERNAL_SERVER_ERROR);
+                        return new ResponseEntity<>("Insufficient Balance", HttpStatus.INTERNAL_SERVER_ERROR);
                     }
                 }
             } else {
@@ -113,11 +118,19 @@ public class WithdrawController {
         return new ResponseEntity<>(withdrawModelList,
                 withdrawModelList.size() > 0 ? HttpStatus.OK : HttpStatus.NO_CONTENT);
     }
-    @GetMapping(path = "{/customer/account-number}")
+
+    @GetMapping(path = "/customer/{account-number}")
     public ResponseEntity<?> getAllWithdrawsByAccountNumber(@PathVariable("account-number") Long accountNumber) {
         List<WithdrawModel> withdrawModelList = withdrawService.getWithdrawsByAccountNumber(accountNumber);
         System.out.println("withdrawList" + withdrawModelList);
         return new ResponseEntity<>(withdrawModelList,
                 withdrawModelList.size() > 0 ? HttpStatus.OK : HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping(path = "/count/{account-number}")
+    public ResponseEntity<?> getAllWithdrawsCountByAccountNumber(@PathVariable("account-number") Long accountNumber) {
+        Integer count = withdrawService.getWithdrawsCountByAccountNumber(accountNumber);
+        return new ResponseEntity<>(count,
+                count > 0 ? HttpStatus.OK : HttpStatus.NO_CONTENT);
     }
 }

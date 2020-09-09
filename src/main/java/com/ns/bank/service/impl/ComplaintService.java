@@ -62,10 +62,12 @@ public class ComplaintService implements IComplaintService {
         ComplaintModel updatedComplaint = new ComplaintModel();
         if (nonNull(complaintModel)) {
             Optional<Complaint> complaint1 = complaintRepository.findById(complaintModel.getId());
-            complaint1.get().setDescription(complaintModel.getDescription());
-            complaint1.get().setRaisedDate(complaintModel.getRaisedDate());
-            complaint1.get().setUpdatedDate(complaintModel.getUpdatedDate());
-            complaint=complaintMapper.convertEntityToModel(complaint1.get());
+            if(complaint1.isPresent()) {
+                complaint1.get().setDescription(complaintModel.getDescription());
+                //Complaint complaintEntity = complaintMapper.convertModelToEntity(complaintModel);
+                complaintRepository.save(complaint1.get());
+                complaint = complaintMapper.convertEntityToModel(complaint1.get());
+            }
         }
         return  complaint;
     }
@@ -101,8 +103,6 @@ public class ComplaintService implements IComplaintService {
     @Override
     public Integer updateStatus(Long statusId,Long complaintId) {
        Integer value =complaintRepository.updateStatus(statusId,complaintId);
-
-
         return  value;
     }
 
@@ -124,6 +124,11 @@ public class ComplaintService implements IComplaintService {
     @Override
     public Integer fetchComplaintsCountByStatusIdAndBranchId(Long statusId, Long branchId) {
         return complaintRepository.getCompalintsCountByStatusAndBranchId(statusId,branchId);
+    }
+
+    @Override
+    public Integer getComplaintsCountByAccountNumber(Long accountNumber) {
+        return complaintRepository.getCompalintCountByAccountNo(accountNumber);
     }
 
     @Override

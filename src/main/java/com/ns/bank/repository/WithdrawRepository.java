@@ -24,5 +24,8 @@ public interface WithdrawRepository extends JpaRepository<Withdraw, Long> {
     @Query(nativeQuery =true,value="SELECT * FROM bankapplication.withdraw where date_format(withdraw_date, '%Y-%m' ) = ? AND status_id=?")
     List<Withdraw> getWithdrawsByYearMonthAndStatusId(String yearMonth,Long statusId);
 
+    @Query(nativeQuery = true,value = "SELECT COUNT(*) FROM bankapplication.withdraw WHERE  customer_id=?1")
+   Integer getWithdrawsCountByAccountNumber(Long accountNumber);
+
 
 }

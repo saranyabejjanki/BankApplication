@@ -29,15 +29,19 @@ INSERT INTO `bankapplication`.`account_type` (`id`, `interest`, `min_balance`, `
 INSERT INTO `bankapplication`.`account_type` (`id`, `interest`, `min_balance`, `name`, `transaction_limit`,`withdraw_limit`, `eligibility_id`) VALUES ('2', '0', '5000', 'CURRENT', '0', '0', '1');
 
 --loantypes
-INSERT INTO `bankapplication`.`loan_type` (`id`, `interest`, `max_amount`, `min_amount`, `months`, `name`, `account_type_id`, `eligibility_id`, `row_status_id`) VALUES ('1', '1', '1000000', '300000', '36', 'HOME', '1', '2', '1');
+INSERT INTO `bankapplication`.`loan_type` (`id`, `interest`, `max_amount`, `min_amount`, `months`, `name`, `account_type_id`, `eligibility_id`, `row_status_id`)
+VALUES ('1', '1', '1000000', '300000', '36', 'HOME', '1', '2', '1');
 INSERT INTO `bankapplication`.`loan_type` (`id`, `interest`, `max_amount`, `min_amount`, `months`, `name`,
-`account_type_id`, `eligibility_id`, `row_status_id`) VALUES ('2', '1', '1000000', '300000', '36', 'HOME', '1', '2', '1');
-INSERT INTO `bankapplication`.`loan_type` (`id`, `interest`, `max_amount`, `min_amount`, `months`, `name`,`account_type_id`, `eligibility_id`, `row_status_id`) VALUES ('3', '1', '1500000', '300000', '60', 'FOUR_WHEELER', '1','2','1');
+`account_type_id`, `eligibility_id`, `row_status_id`)
+ VALUES ('2', '1', '1000000', '300000', '36', 'HOME', '2', '2', '1');
+INSERT INTO `bankapplication`.`loan_type` (`id`, `interest`, `max_amount`, `min_amount`, `months`, `name`,`account_type_id`, `eligibility_id`, `row_status_id`)
+ VALUES ('3', '1', '1500000', '300000', '60', 'FOUR_WHEELER', '1','2','1');
 INSERT INTO `bankapplication`.`loan_type` (`id`, `interest`, `max_amount`, `min_amount`, `months`, `name`,
-`account_type_id`, `eligibility_id`, `row_status_id`) VALUES ('4', '1', '1500000', '300000', '60', 'FOUR_WHEELER', '1','2','1');
+`account_type_id`, `eligibility_id`, `row_status_id`)
+VALUES ('4', '1', '1500000', '300000', '60', 'FOUR_WHEELER', '2','2','1');
 INSERT INTO `bankapplication`.`loan_type` (`id`, `interest`, `max_amount`, `min_amount`, `months`, `name`,`account_type_id`, `eligibility_id`, `row_status_id`) VALUES ('5', '1', '300000', '50000', '24', 'TWO_WHEELER', '1','2','1');
 INSERT INTO `bankapplication`.`loan_type` (`id`, `interest`, `max_amount`, `min_amount`, `months`, `name`,
-`account_type_id`, `eligibility_id`, `row_status_id`) VALUES ('6', '1', '300000', '50000', '24', 'TWO_WHEELER', '1','2','1');
+`account_type_id`, `eligibility_id`, `row_status_id`) VALUES ('6', '1', '300000', '50000', '24', 'TWO_WHEELER', '2','2','1');
 
 
 

@@ -15,4 +15,5 @@ public interface IDepositService {
     int updateDepositStatus(Long statusId,Long depositId);
     List<DepositModel> getAllDepositByStatusId(Long statusId);
     List<DepositModel> getDepositsByAccountNumber(Long accountNumber);
+    Integer getDepositsCountByAccountNumber(Long accountNumber);
 }

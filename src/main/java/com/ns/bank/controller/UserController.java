@@ -73,10 +73,11 @@ public class UserController {
 
         } else {
              MyUserDetails myUserDetails = (MyUserDetails) authentication.getPrincipal();
-            final UserDetails userDetails = userService.loadUserByUsername(loginModel.getEmail());
+            final  MyUserDetails userDetails = (MyUserDetails) userService.loadUserByUsername(loginModel.getEmail());
             final String jwt = jwtUtil.generateToken(userDetails);
 
-          return ResponseEntity.ok(new AuthenticationResponse(jwt, myUserDetails.getId(), myUserDetails.getName(), myUserDetails.getUserModel().getRoleModel().getName(), myUserDetails.getUsername()));
+           // System.out.println("BranchCode::"+userDetails.getBranchCode());
+          return ResponseEntity.ok(new AuthenticationResponse(jwt, myUserDetails.getId(), myUserDetails.getName(), myUserDetails.getUserModel().getRoleModel().getName(), myUserDetails.getUsername(),userDetails.getBranchCode()));
 
         }
     }

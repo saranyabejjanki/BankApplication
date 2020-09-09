@@ -37,4 +37,9 @@ public interface ComplaintRepository extends JpaRepository<Complaint, Long> {
             ".customer " +
             "ON complaint.account_no = customer.account_no  WHERE  complaint.status_id=?1 AND branch_id=?2")
     Integer getCompalintsCountByStatusAndBranchId(Long statusId, Long branchId);
+
+
+    @Query(nativeQuery = true,value="SELECT COUNT(*) FROM bankapplication.complaint WHERE account_no=?1")
+    public Integer getCompalintCountByAccountNo(Long accountNo);
+
 }

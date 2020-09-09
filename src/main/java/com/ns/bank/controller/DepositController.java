@@ -32,6 +32,7 @@ public class DepositController {
         return new ResponseEntity<>(depositModelList,
                 depositModelList.size() > 0 ? HttpStatus.OK : HttpStatus.NO_CONTENT);
     }
+
     @GetMapping(path = "/{deposit-id}")
     public ResponseEntity<?> getDepositById(@PathVariable("deposit-id") Long depositId, @PathVariable("account-number") Long accountNumber) {
         String message = null;
@@ -67,6 +68,7 @@ public class DepositController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
     }
+
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> createDeposit(@RequestBody DepositModel depositModel) {
         // System.out.println("id"+depositModel.getStatusModel().getId());
@@ -81,7 +83,7 @@ public class DepositController {
             if (nonNull(depositModel1.getDepositAmount())) {
                 if (customerService.checkAccountNumberExists(depositModel.getCustomerModel().getAccountNo())) {
                     Double balance = customerService.getBalanceById(depositModel.getCustomerModel().getAccountNo());
-                   // balance = balance + depositModel1.getDepositAmount();
+                    // balance = balance + depositModel1.getDepositAmount();
                     int result = customerService.updateBalanceByAccountNumber(depositModel1.getDepositAmount(), depositModel.getCustomerModel().getAccountNo());
                     if (result > 0) {
                         int value = depositService.updateDepositStatus(6L, depositModel1.getId());
@@ -98,17 +100,28 @@ public class DepositController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
     }
+
     @GetMapping(path = "/status/{status-id}")
     public ResponseEntity<?> getAllDepositsByStatusId(@PathVariable("status-id") Long statusId) {
         List<DepositModel> depositModelList = depositService.getAllDepositByStatusId(statusId);
         return new ResponseEntity<>(depositModelList,
                 depositModelList.size() > 0 ? HttpStatus.OK : HttpStatus.NO_CONTENT);
     }
-    @GetMapping(path = "{/customer/account-number}")
+
+    @GetMapping(path = "/customer/{account-number}")
     public ResponseEntity<?> getAllDepositsByAccountNumber(@PathVariable("account-number") Long accountNumber) {
         List<DepositModel> depositModelList = depositService.getDepositsByAccountNumber(accountNumber);
         System.out.println("depositList" + depositModelList);
         return new ResponseEntity<>(depositModelList,
                 depositModelList.size() > 0 ? HttpStatus.OK : HttpStatus.NO_CONTENT);
     }
+
+    @GetMapping(path = "count/{account-number}")
+    public ResponseEntity<?> getAllDepositsCountByAccountNumber(@PathVariable("account-number") Long accountNumber) {
+        Integer count = depositService.getDepositsCountByAccountNumber(accountNumber);
+        return new ResponseEntity<>(count,
+                count > 0 ? HttpStatus.OK : HttpStatus.NO_CONTENT);
+    }
+
+
 }

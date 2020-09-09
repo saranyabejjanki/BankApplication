@@ -26,6 +26,7 @@ public class JwtUtil {
     public String extractEmail(String token){
         return extractClaim(token, Claims::getSubject);
     }
+
     public Date extractExpiration(String token){
         return extractClaim(token, Claims::getExpiration);
     }
@@ -76,7 +77,8 @@ public class JwtUtil {
         claims.put("id",customerModel.getAccountNo());
         claims.put("email",customerModel.getEmail());
         claims.put("role","Customer");
-        return createToken(claims,userDetails.getUsername());
+       /* return createToken(claims,userDetails.getUsername());*/
+        return createToken(claims,customerModel.getEmail());
     }
     private String createToken(Map<String ,Object> claims, String subject)
     {

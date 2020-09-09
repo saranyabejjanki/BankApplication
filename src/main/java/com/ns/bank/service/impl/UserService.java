@@ -180,7 +180,9 @@ public class UserService implements IUserService , UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserModel userModel = findUserByEmail(username);
-        System.out.println("inside user service,...");
+        System.out.println("inside usser service........");
+      System.out.println("code::"+ userModel.getBranchModel().getBranchCode());
+        System.out.println("inside user service,..."+username);
      /* Collection authorities =  new ArrayList<>();
       authorities.add(userModel.getRoleModel().getName());*/
         if (username.equals(userModel.getEmail())) {

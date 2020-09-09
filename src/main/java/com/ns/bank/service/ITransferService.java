@@ -11,4 +11,5 @@ public interface ITransferService {
     int updateTransferStatus(Long statusId,Long transferId);
     List<TransferModel> getAllTransferByStatusId(Long statusId);
     List<TransferModel> getTransfersByAccountNumber(Long accountNumber);
+    Integer getTransfersCountByAccountNumber(Long accountNumber);
 }

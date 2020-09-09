@@ -48,8 +48,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         UserDetails userDetails = null;
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             jwt = authorizationHeader.substring(7);
-
             email = jwtUtil.extractEmail(jwt);
+            System.out.println("email inside filter"+email);
         }
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
         if (nonNull(role)) {

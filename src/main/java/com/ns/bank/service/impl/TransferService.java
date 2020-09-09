@@ -74,4 +74,9 @@ public class TransferService implements ITransferService {
         transferEntities.forEach(transfer->  transfersModels.add(modelMapper.map(transfer, TransferModel.class)));
         return transfersModels;
     }
+
+    @Override
+    public Integer getTransfersCountByAccountNumber(Long accountNumber) {
+        return transferRepository.getTransfersCountByAccountNumber(accountNumber);
+    }
 }
